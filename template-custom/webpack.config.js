@@ -100,6 +100,7 @@ export default merge(defaultWebpackConfig, {
         host: "0.0.0.0",
         port: 3001,
         server: "https",
+        open: "https://localtest.me:3001/",
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",

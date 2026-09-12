@@ -38,4 +38,9 @@ process.on("unhandledRejection", err => {
     throw err;
 });
 
+// Ensure HTTPS server type so devServer opens https:// and never falls back to http://
+if (!process.argv.includes("--type")) {
+    process.argv.push("--type", "https");
+}
+
 sdkStart(webpackConfig, "web");
