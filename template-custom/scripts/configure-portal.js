@@ -258,10 +258,15 @@ async function main() {
     if (webMap) {
         console.log(`  - Web Map:    ${webMap}`);
     }
-    console.log("\n  IMPORTANT PREREQUISITE in your Portal App Registration:");
-    console.log("  Ensure the following Redirect URIs are registered in Portal:");
-    console.log("    • https://localtest.me:3001");
-    console.log("    • https://localtest.me:3001/oauth_callback.html");
+    console.log("\n  IMPORTANT PREREQUISITES in your Portal Configuration:");
+    console.log("  1. OAuth App Registration (Content > Add Item > Application):");
+    console.log("     Ensure Redirect URIs include:");
+    console.log("       • https://localtest.me:3001");
+    console.log("       • https://localtest.me:3001/oauth_callback.html");
+    console.log("  2. Allowed Origins / CORS (Organization > Settings > Security > Allow Origins):");
+    console.log("     If cross-domain requests are restricted, whitelist your development origin:");
+    console.log("       • https://localtest.me:3001");
+    console.log("     (Note: ArcGIS Enterprise requires an FQDN and rejects bare \"localhost\")");
     console.log("\n  Next Steps:");
     console.log("    Run: npm start (or ./start.sh)");
     console.log("================================================================================\n");

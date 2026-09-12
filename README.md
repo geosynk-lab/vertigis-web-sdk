@@ -171,13 +171,28 @@ When referencing secured Web Maps or layers from an ArcGIS Enterprise Portal or 
 
 This SDK includes an automated configuration wizard that sets up seamless OAuth 2.0 authentication, trusted servers, and callback endpoints.
 
-#### Step 1: Portal Application Registration (Prerequisite)
+#### Step 1: Portal Prerequisites (Application Registration & CORS Allowed Origins)
+
+To allow the browser to authenticate and fetch secured resources (Web Maps, layers, feature services, REST metadata) from ArcGIS Enterprise, configure the following in your Portal:
+
+##### A. Register Application (OAuth 2.0 Client ID & Redirect URIs)
 1. Log in to your ArcGIS Enterprise Portal or ArcGIS Online organization.
 2. Navigate to **Content** > **Add Item** > **An Application** > **Application Configuration**.
-3. Under **Redirect URIs**, add the following development endpoints:
+3. Under **Redirect URIs**, add the development callback endpoints:
    - `https://localtest.me:3001`
    - `https://localtest.me:3001/oauth_callback.html`
 4. Copy the generated **Client ID** (App ID) (e.g., `myClientId123`).
+
+##### B. Allow Origins for CORS (Cross-Origin Resource Sharing)
+If your ArcGIS Enterprise Portal restricts cross-domain requests, you must whitelist your development origin to permit direct browser REST queries and resource fetching:
+1. Log in to Portal as an **Administrator**.
+2. Navigate to **Organization** > **Settings** > **Security**.
+3. Scroll down to the **Allow Origins** section.
+4. Add the development origin URL:
+   - `https://localtest.me:3001`
+5. Click **Add Domain** and **Save**.
+
+> **Note**: ArcGIS Enterprise requires a fully qualified domain name (FQDN) containing a domain suffix (e.g., `localtest.me:3001`). Bare hostnames like `localhost` and wildcard `*` machine names are rejected by Portal security. In production, VertiGIS Studio Web is deployed directly within your GIS environment, so only the development origin needs whitelisting.
 
 #### Step 2: Run the Automated Portal Configurator
 Run the interactive configurator in your project:
@@ -221,6 +236,27 @@ When accessing `https://localtest.me:3001/`, VertiGIS Web automatically triggers
 - Host over **HTTPS** with a valid SSL certificate.
 - Configure web server headers for Cross-Origin Resource Sharing (`Access-Control-Allow-Origin: *`).
 - Update your VertiGIS Web Designer custom library URL to point to your production URL `https://your-server.com/path/<project-name>.js`.
+
+---
+
+### 6. AI Coding Assistant Skills (Antigravity, Cursor, Claude Code)
+
+This SDK integrates directly with the [VertiGIS SDK Skills repository](https://github.com/davekazemi/vertigis-sdk-skills).
+
+During project creation, you will be prompted:
+```text
+? Would you like to install AI coding assistant skills from https://github.com/davekazemi/vertigis-sdk-skills into this project? [Y/n]
+```
+If accepted, the `vertigis-web-sdk-skill` is automatically installed into `./.agents/skills/` using the standard `skills` tool (`npx skills add`).
+
+You can install or update the skill at any time in your project:
+```bash
+npm run skill:add
+```
+Or via non-interactive flag during scaffolding:
+```bash
+npx @geosynk/vertigis-web-sdk create my-app --skills
+```
 
 ---
 
