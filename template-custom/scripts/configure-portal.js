@@ -25,10 +25,10 @@ Usage:
   npm run auth:portal -- [options]
 
 Options:
-  --portal <url>        ArcGIS Enterprise Portal or AGOL URL (e.g. https://gis.company.com/portal)
-  --app-id <id>         Portal OAuth Application Client ID / App ID
-  --account-id <id>     Account ID / Org slug (default: derived from hostname or "enterprise")
-  --webmap <id-or-url>  Web Map Item ID or full Portal URL
+  --portal <url>        [Required] ArcGIS Enterprise Portal or AGOL URL (e.g. https://gis.{org}.com/portal)
+  --app-id <id>         [Required] Portal OAuth Application Client ID / App ID
+  --account-id <id>     [Optional] Account ID / Org slug (default: derived from hostname or "enterprise")
+  --webmap <id-or-url>  [Optional] Web Map Item ID or full URL to update in app.json
   --reset               Revert back to public sample ArcGIS Online map and disable portal auth
   -h, --help            Show this help message
 

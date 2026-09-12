@@ -185,17 +185,22 @@ Run the interactive configurator in your project:
 npm run auth:portal
 ```
 You will be prompted for:
-- **Portal URL**: Your Enterprise Portal instance (e.g., `https://gis.{org}.com/portal`).
-- **App ID (Client ID)**: The App ID obtained from Step 1.
-- **Account ID**: Organization identifier (e.g., `{org}` or `enterprise`).
-- **Web Map Item ID or URL**: The secured web map to load (e.g., `4f970e5d0a684b0f9f30cf00fa0119e6`).
+- **Portal URL** `[Required]`: Your Enterprise Portal instance (e.g., `https://gis.{org}.com/portal`).
+- **App ID (Client ID)** `[Required]`: The App ID obtained from Step 1.
+- **Account ID** `[Optional]`: Organization identifier (e.g., `{org}` or `enterprise`).
+- **Web Map Item ID or URL** `[Optional]`: If provided, automatically updates `webMap` in `app/app.json`. If omitted, your current `app.json` remains untouched.
 
 Or execute directly via non-interactive CLI flags:
 ```bash
+# Minimal (configures Portal OAuth, leaves current app.json untouched):
+npm run auth:portal -- \
+  --portal https://gis.{org}.com/portal \
+  --app-id myPortalAppId123
+
+# Full (configures Portal OAuth AND updates app.json web map):
 npm run auth:portal -- \
   --portal https://gis.{org}.com/portal \
   --app-id myPortalAppId123 \
-  --account-id {org} \
   --webmap 4f970e5d0a684b0f9f30cf00fa0119e6
 ```
 
