@@ -1,17 +1,20 @@
 {
-    "name": "@vertigis/web-sdk",
-    "version": "0.0.0-semantically-released",
-    "description": "The SDK for extending VertiGIS Studio Web",
+    "name": "@davekazemi/vertigis-web-sdk",
+    "version": "1.0.0",
+    "description": "Enterprise SDK for extending VertiGIS Studio Web",
+    "publishConfig": {
+        "access": "public"
+    },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/vertigis/vertigis-web-sdk.git"
+        "url": "git+https://github.com/davekazemi/vertigis-web-sdk.git"
     },
-    "author": "VertiGIS Ltd. <eric.parsons@vertigis.com>",
+    "author": "VertiGIS Ltd. / Dave Kazemi",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/vertigis/vertigis-web-sdk/issues"
+        "url": "https://github.com/davekazemi/vertigis-web-sdk/issues"
     },
-    "homepage": "https://github.com/vertigis/vertigis-web-sdk#readme",
+    "homepage": "https://github.com/davekazemi/vertigis-web-sdk#readme",
     "files": [
         "bin",
         "config",
