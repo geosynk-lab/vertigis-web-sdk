@@ -1,5 +1,5 @@
 {
-    "name": "@davekazemi/vertigis-web-sdk",
+    "name": "@geosynk/vertigis-web-sdk",
     "version": "1.0.0",
     "description": "Enterprise SDK for extending VertiGIS Studio Web",
     "publishConfig": {
@@ -9,7 +9,7 @@
         "type": "git",
         "url": "git+https://github.com/davekazemi/vertigis-web-sdk.git"
     },
-    "author": "VertiGIS Ltd. / Davood Kazemi",
+    "author": "VertiGIS Ltd. / Davood Kazemi (GeoSynk)",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/davekazemi/vertigis-web-sdk/issues"
