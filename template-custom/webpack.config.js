@@ -115,6 +115,34 @@ export default merge(defaultWebpackConfig, {
                 protocol: "wss",
             },
         },
+        setupMiddlewares: (middlewares, devServer) => {
+            middlewares.unshift({
+                name: "portal-auth-interceptor",
+                middleware: (req, res, next) => {
+                    const url = req.url.split("?")[0];
+                    if (url === "/viewer/auth/portal.json" || url === "/auth/portal.json") {
+                        const portalJsonPath = path.resolve(process.cwd(), "app/auth/portal.json");
+                        if (fs.existsSync(portalJsonPath)) {
+                            res.setHeader("Content-Type", "application/json");
+                            res.setHeader("Access-Control-Allow-Origin", "*");
+                            res.end(fs.readFileSync(portalJsonPath, "utf-8"));
+                            return;
+                        }
+                    }
+                    if (url === "/oauth_callback.html" || url === "/viewer/oauth_callback.html") {
+                        const cbPath = path.resolve(process.cwd(), "app/oauth_callback.html");
+                        if (fs.existsSync(cbPath)) {
+                            res.setHeader("Content-Type", "text/html");
+                            res.setHeader("Access-Control-Allow-Origin", "*");
+                            res.end(fs.readFileSync(cbPath, "utf-8"));
+                            return;
+                        }
+                    }
+                    next();
+                },
+            });
+            return middlewares;
+        },
         onListening: function () {
             setupDualPortBridge(3001, 3000);
         },

@@ -1,6 +1,6 @@
 {
     "name": "@geosynk/vertigis-web-sdk",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Enterprise SDK for extending VertiGIS Studio Web",
     "publishConfig": {
         "access": "public"

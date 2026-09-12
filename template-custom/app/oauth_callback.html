@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>OAuth Callback</title>
+  <script>
+    function loadHandler() {
+      if (opener) {
+        if (location.hash && opener.completeOAuth) {
+          opener.completeOAuth(location.hash);
+          close();
+        } else if (location.search) {
+          opener.dispatchEvent(new CustomEvent("arcgis:auth:location:search", { detail: location.search }));
+          close();
+        } else {
+          close();
+        }
+      } else {
+        close();
+      }
+    }
+    window.addEventListener("load", loadHandler);
+  </script>
+</head>
+<body>
+</body>
+</html>
