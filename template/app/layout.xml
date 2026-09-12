@@ -1,7 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<layout xmlns="https://geocortex.com/layout/v1" xmlns:custom="custom.foo">
-    <map config="map-1">
-        <text config="text-1" slot="top-left" width="22"/>
-        <custom:points-of-interest config="points-of-interest-1" slot="top-right" width="22" />
-    </map>
+<layout xmlns="https://geocortex.com/layout/v1" id="layout-4f5dc45c">
+    <split id="split-a5817a92" resizable="true" config="root">
+        <tabs xmlns="https://geocortex.com/layout/web/v1" id="tabs-543112c0" config="589a9171-58ec-426f-8d3c-c9360652a9ba" grow="0" width="30.714285714285715">
+            <workflow xmlns="https://geocortex.com/layout/v1" id="workflow-3581b6f4" active="false" config="workflow-config-1"/>
+            <results-list xmlns="https://geocortex.com/layout/v1" id="results-list-b080e39e" config="d14a8d22-a132-47cf-9d50-b9c759a97ebd"/>
+            <results-list xmlns="https://geocortex.com/layout/v1" id="results-list-3662ab43" config="4a52c284-ccb6-4a55-a8d6-94b632d838ed"/>
+            <feature-details xmlns="https://geocortex.com/layout/v1" id="feature-details-ec4c6c29" config="333edeb8-b651-4d17-b361-46fc5603c71d"/>
+            <legend xmlns="https://geocortex.com/layout/v1" id="legend-ab7f8a19" config="e1c66411-032e-412a-b41f-b9892dd5246d" models="#map-primary"/>
+            <layer-list xmlns="https://geocortex.com/layout/v1" id="layer-list-826e9f3a" config="c1aa340a-8a4c-4034-b397-f46157b14217" models="#map-primary"/>
+        </tabs>
+        <map id="map-primary" config="default" grow="100">
+            <search id="search-2557a463" config="search-config-1" width="20" slot="top-end"/>
+            <button id="button-3c133eaf" config="a4f5334d-96c3-41e9-983e-75f10fc8b1c8"/>
+            <button id="button-9119cbb6" config="931927bb-e741-4ae8-ba08-e22b3daf8aa1"/>
+            <map-3d-toggle xmlns="https://geocortex.com/layout/web/v1" id="map-3d-toggle-376f6dd3" config="map-3d-toggle-config-1" slot="top-end"/>
+            <compass id="compass-b4586b9f" config="compass-config-1" slot="top-start"/>
+            <scalebar id="scalebar-39a846f2" config="scalebar-config-1" slot="bottom-start"/>
+            <button id="button-eb8881da" config="measure-button-config" show-title="false" slot="bottom-start"/>
+            <button id="button-801867d1" config="get-user-coordinates-button-config" show-title="false" slot="bottom-start"/>
+        </map>
+    </split>
 </layout>
