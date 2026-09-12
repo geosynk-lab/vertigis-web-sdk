@@ -82,6 +82,54 @@ if (fs.existsSync(customTemplateDir) && fs.existsSync(targetPath)) {
         }
     }
 
+    // Ensure custom layout namespace matches between app/layout.xml and src/index.ts
+    const cryptoMod = await import("node:crypto");
+    const randomNamespace = `custom.${cryptoMod.randomBytes(4).toString("hex")}`;
+    const filesToUpdate = [
+        path.join(targetPath, "app/layout.xml"),
+        path.join(targetPath, "src/index.ts"),
+    ];
+    for (const fileToUpdate of filesToUpdate) {
+        if (fs.existsSync(fileToUpdate)) {
+            try {
+                const contents = fs.readFileSync(fileToUpdate, { encoding: "utf8" });
+                const newContents = contents.replace(/custom\.foo/g, randomNamespace);
+                fs.writeFileSync(fileToUpdate, newContents, "utf-8");
+            } catch {
+                // Ignore replacement failure
+            }
+        }
+    }
+
+    // 2.1 Ensure @vertigis/web-sdk resolves in node_modules even when installed as @geosynk/vertigis-web-sdk
+    const nodeModulesDir = path.join(targetPath, "node_modules");
+    const vertigisScope = path.join(nodeModulesDir, "@vertigis");
+    const vertigisSdk = path.join(vertigisScope, "web-sdk");
+    const geosynkSdk = path.join(nodeModulesDir, "@geosynk", "vertigis-web-sdk");
+
+    if (fs.existsSync(geosynkSdk) && !fs.existsSync(vertigisSdk)) {
+        try {
+            if (!fs.existsSync(vertigisScope)) {
+                fs.mkdirSync(vertigisScope, { recursive: true });
+            }
+            fs.symlinkSync(geosynkSdk, vertigisSdk, "junction");
+            console.log("[ENTERPRISE] Linked @vertigis/web-sdk -> @geosynk/vertigis-web-sdk");
+        } catch (e) {
+            console.warn("[WARN] Could not link @vertigis/web-sdk:", e);
+        }
+    } else if (fs.existsSync(vertigisSdk) && !fs.existsSync(geosynkSdk)) {
+        try {
+            const geosynkScope = path.join(nodeModulesDir, "@geosynk");
+            if (!fs.existsSync(geosynkScope)) {
+                fs.mkdirSync(geosynkScope, { recursive: true });
+            }
+            fs.symlinkSync(vertigisSdk, geosynkSdk, "junction");
+            console.log("[ENTERPRISE] Linked @geosynk/vertigis-web-sdk -> @vertigis/web-sdk");
+        } catch (e) {
+            console.warn("[WARN] Could not link @geosynk/vertigis-web-sdk:", e);
+        }
+    }
+
     // 3. Merge enterprise dependencies into package.json
     const pkgPath = path.join(targetPath, "package.json");
     if (fs.existsSync(pkgPath)) {

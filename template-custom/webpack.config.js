@@ -1,7 +1,18 @@
 import fs from "node:fs";
 import path from "node:path";
 import https from "node:https";
-import defaultWebpackConfig, { merge } from "@vertigis/web-sdk/config/webpack.config.js";
+
+let defaultWebpackConfig, merge;
+try {
+    const mod = await import("@vertigis/web-sdk/config/webpack.config.js");
+    defaultWebpackConfig = mod.default;
+    merge = mod.merge;
+} catch {
+    const mod = await import("@geosynk/vertigis-web-sdk/config/webpack.config.js");
+    defaultWebpackConfig = mod.default;
+    merge = mod.merge;
+}
+
 
 /**
  * Starts a lightweight zero-dependency dual-port forwarder on port 3000 forwarding to port 3001.
@@ -94,13 +105,16 @@ function setupDualPortBridge(targetPort = 3001, bridgePort = 3000) {
     }
 }
 
+const typeIndex = process.argv.indexOf("--type");
+const isHttp = typeIndex !== -1 && process.argv[typeIndex + 1] === "http";
+
 export default merge(defaultWebpackConfig, {
     devServer: {
         allowedHosts: "all",
         host: "0.0.0.0",
         port: 3001,
-        server: "https",
-        open: "https://localtest.me:3001/",
+        server: isHttp ? "http" : "https",
+        open: isHttp ? "http://localhost:3001/" : "https://localtest.me:3001/",
         headers: {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
@@ -109,10 +123,10 @@ export default merge(defaultWebpackConfig, {
         },
         client: {
             webSocketURL: {
-                hostname: "localtest.me",
+                hostname: isHttp ? "localhost" : "localtest.me",
                 pathname: "/ws",
                 port: 3001,
-                protocol: "wss",
+                protocol: isHttp ? "ws" : "wss",
             },
         },
         setupMiddlewares: (middlewares, devServer) => {
@@ -144,7 +158,9 @@ export default merge(defaultWebpackConfig, {
             return middlewares;
         },
         onListening: function () {
-            setupDualPortBridge(3001, 3000);
+            if (!isHttp) {
+                setupDualPortBridge(3001, 3000);
+            }
         },
     },
 });

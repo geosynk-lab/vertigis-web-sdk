@@ -1,7 +1,14 @@
 <p align="center">
-  <a href="https://geosynk.com.au/" target="_blank" rel="noopener noreferrer">
-    <img src="https://geosynk.com.au/images/logo/LOGO_MAIN1.svg" alt="Geosynk" width="380" />
+  <a href="https://geosynk.com.au" target="_blank" rel="noopener noreferrer">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://geosynk.com.au/images/logo/LOGO_MAIN1_DARK.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://geosynk.com.au/images/logo/LOGO_MAIN1.svg">
+      <img src="https://geosynk.com.au/images/logo/LOGO_MAIN1.svg" alt="Geosynk" width="380" />
+    </picture>
   </a>
+</p>
+<p align="center">
+  <strong><em>Unifying Spatial Data with Enterprise Intelligence</em></strong>
 </p>
 
 # VertiGIS Studio Web SDK (Enterprise Edition)
@@ -286,17 +293,32 @@ Or run the parent batch synchronizer:
 
 ## About Geosynk
 
-[Geosynk](https://geosynk.com.au/) is an Australian geospatial engineering and software consultancy founded by Davood Kazemi, delivering enterprise GIS architecture, custom VertiGIS solutions, and modern web applications.
+[Geosynk](https://geosynk.com.au/) is a certified GIS technical integration consultancy founded by Davood Kazemi, engineering high-performance spatial automation pipelines, bespoke VertiGIS applications, and resilient enterprise GIS architecture.
 
-### Core Capabilities & Topics
+> *"We don't just implement technology; we engineer business value. Digital transformation in infrastructure is a safeguard against project waste and operational risk."*
+
+### Core Philosophy
+
+| Principle | Impact | How We Deliver It |
+| :--- | :--- | :--- |
+| **Radically Simple** | *Reduces Overhead* | Complexity is the enemy of adoption. Clear interfaces reduce training costs and eliminate decision fatigue. |
+| **Frictionless Efficiency** | *Accelerates Velocity* | Automating repetitive data flows recovers thousands of engineering hours annually. |
+| **Deeply Integrated** | *Prevents Rework* | Connected systems establish a single source of truth across CAD, BIM, GIS, and ERP. |
+
+### Core Capabilities & Offerings
 
 - **VertiGIS Studio Engineering**: Turnkey Web SDK components, custom Workflow activities, accessible form elements, report templates, and automated printing services.
+- **FME Advanced Automation**: End-to-end spatial ETL pipelines, Python SDK custom transformers, FME Form & Flow (Server), and CAD/BIM/GIS synchronization.
 - **Esri ArcGIS Enterprise**: End-to-end cloud and on-premises architecture, Enterprise Geodatabase design, Utility Network migrations, and ArcGIS Experience Builder extensions.
-- **Full-Stack Spatial Systems**: High-performance React, TypeScript, Node.js, WebGL, and Leaflet/Mapbox interactive web applications.
-- **Spatial DevOps & Automation**: Automated CI/CD pipelines, automated testing, containerized GIS deployments, and infrastructure as code across AWS and Microsoft Azure.
+- **Custom Spatial Development**: High-performance React, TypeScript, and Python GIS tooling engineered for unique operational requirements.
+- **Enterprise Orchestration**: Unifying Trimble, Bentley, Autodesk, and GIS into a cohesive enterprise framework.
 
 ### Connect with Geosynk
-- **Website**: [https://geosynk.com.au](https://geosynk.com.au/)
-- **Contact**: [Davood Kazemi](mailto:dave.kazemi@gmail.com)
+
+- 🌐 **Website**: [geosynk.com.au](https://geosynk.com.au/)
+- 💼 **LinkedIn**: [Geosynk Company](https://www.linkedin.com/company/ggeosynk)
+- ✉️ **Email**: [info@geosynk.com.au](mailto:info@geosynk.com.au) / [Davood Kazemi](mailto:dave.kazemi@gmail.com)
+- 📅 **Consultation**: [Book a 1-on-1 Session](https://geosynk.com.au#contact)
+
 
 

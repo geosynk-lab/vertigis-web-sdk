@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI
 
 on:
     push:
@@ -12,52 +12,24 @@ on:
             - alpha
             - beta
 
-env:
-    CI: true
-
 jobs:
     test:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
 
-            - name: Use Node.js 24
+            - name: Use Node.js 22
               uses: actions/setup-node@v4
               with:
-                  node-version: 24.x
+                  node-version: 22.x
 
             - run: npm install
 
-            - run: npm run test
+            - name: Test Project Scaffolding & Build
+              run: |
+                  mkdir -p /tmp/test-ci-web
+                  node bin/vertigis-web-sdk.js create /tmp/test-ci-web/sample-app --no-skills
+                  cd /tmp/test-ci-web/sample-app
+                  npm run build
+                  test -f build/main.js
 
-    release:
-        runs-on: ubuntu-latest
-        needs:
-            - test
-        if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/alpha' || github.ref == 'refs/heads/beta'
-        steps:
-            - uses: actions/checkout@v4
-              with:
-                  # Pulls all commits (needed for semantic release to correctly version)
-                  # See https://github.com/semantic-release/semantic-release/issues/1526
-                  fetch-depth: "0"
-                  persist-credentials: false
-
-            # Pulls all tags (needed for semantic release to correctly version)
-            - name: Fetch git tags
-              run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
-
-            - name: Use Node.js 24
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 24.x
-
-            - run: npm install
-              env:
-                  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "1"
-
-            - name: Release 🚀
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-              run: npx semantic-release
