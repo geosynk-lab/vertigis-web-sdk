@@ -1,5 +1,9 @@
 import type { LibraryRegistry } from "@vertigis/web/config";
 import CustomWidget, { CustomWidgetModel } from "./components/CustomWidget";
+import { initPortalAuth } from "./auth";
+
+// Automatically initialize ArcGIS Enterprise Portal OAuth if configured via `npm run auth:portal`
+initPortalAuth();
 
 const LAYOUT_NAMESPACE = "custom.foo";
 

@@ -38,6 +38,7 @@ if (fs.existsSync(customTemplateDir) && fs.existsSync(targetPath)) {
             path.join(targetPath, "certs/generate-cert.sh"),
             path.join(targetPath, "start.sh"),
             path.join(targetPath, "build.sh"),
+            path.join(targetPath, "scripts/configure-portal.js"),
         ];
         for (const exe of executables) {
             if (fs.existsSync(exe)) {
@@ -79,9 +80,10 @@ if (fs.existsSync(customTemplateDir) && fs.existsSync(targetPath)) {
 
             pkg.scripts = pkg.scripts || {};
             pkg.scripts["cert:gen"] = "bash ./certs/generate-cert.sh";
+            pkg.scripts["auth:portal"] = "node ./scripts/configure-portal.js";
 
             fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 4) + "\n", "utf-8");
-            console.log("[ENTERPRISE] Added enterprise dependencies (@mui/material, @emotion/*) to package.json");
+            console.log("[ENTERPRISE] Added enterprise dependencies and auth:portal script to package.json");
         } catch (e) {
             console.warn("[WARN] Failed to merge enterprise package.json dependencies:", e);
         }
@@ -107,6 +109,7 @@ if (fs.existsSync(customTemplateDir) && fs.existsSync(targetPath)) {
     console.log("  - Centralized Design Tokens: src/tokens/ (100% safe fallbacks & color-mix)");
     console.log("  - Dynamic Dark/Light Theme:  src/hooks/useIsDarkTheme.ts & src/utils/");
     console.log("  - Anti-God Component:        src/components/CustomWidget/ (ErrorBoundary)");
+    console.log("  - Portal Auth Config:        npm run auth:portal (Enterprise Portal / AGOL OAuth)");
     console.log("  - Development Scripts:       start.sh / start.bat, build.sh / build.bat");
     console.log("  - AI Directives:             AGENTS.md pre-configured for coding assistants");
     console.log("================================================================================\n");

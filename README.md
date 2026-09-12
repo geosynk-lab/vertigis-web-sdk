@@ -113,6 +113,7 @@ my-web-library/
 
 - **`./start.sh` (or `start.bat`)**: Kills stale port 3000 processes, generates SSL certificates if missing, and runs `npm start`.
 - **`npm start`**: Runs the project in development mode with hot reloading.
+- **`npm run auth:portal`**: Interactive wizard to configure ArcGIS Enterprise Portal / AGOL OAuth authentication and secured web maps.
 - **`npm run build`** (or `./build.sh`): Generates an optimized production bundle in `dist/`.
 - **`npm run cert:gen`**: Regenerates development SSL certificates in `certs/`.
 
@@ -158,8 +159,57 @@ build.bat       # Windows
 # or: npm run build
 ```
 Outputs optimized bundles to `build/`:
-- `build/main.js` & `build/<project-name>.js`: Minified production bundle
-- `build/<project-name>.js.txt`: Script text artifact for hosting in strict web environments requiring `.txt` extensions
+- `build/main.js` (standard AMD bundle)
+- `build/<project-name>.js` (named bundle for ArcGIS portal hosting)
+- `build/<project-name>.js.txt` (raw text bundle for script upload workflows)
+
+---
+
+### 5. ArcGIS Enterprise & Secured Portal Authentication
+
+When referencing secured Web Maps or layers from an ArcGIS Enterprise Portal or private ArcGIS Online organization, applications fail to authenticate or incorrectly fall back to the built-in basic username/password modal if OAuth is unconfigured.
+
+This SDK includes an automated configuration wizard that sets up seamless OAuth 2.0 authentication, trusted servers, and callback endpoints.
+
+#### Step 1: Portal Application Registration (Prerequisite)
+1. Log in to your ArcGIS Enterprise Portal or ArcGIS Online organization.
+2. Navigate to **Content** > **Add Item** > **An Application** > **Application Configuration**.
+3. Under **Redirect URIs**, add the following development endpoints:
+   - `https://localtest.me:3001`
+   - `https://localtest.me:3001/oauth_callback.html`
+4. Copy the generated **App ID / Client ID** (e.g., `wXfL4Me24ZkSoALH`).
+
+#### Step 2: Run the Automated Portal Configurator
+Run the interactive configurator in your project:
+```bash
+npm run auth:portal
+```
+You will be prompted for:
+- **Portal URL**: Your Enterprise Portal instance (e.g., `https://gis-prod.cimic.com.au/Portal`).
+- **App ID (Client ID)**: The App ID obtained from Step 1.
+- **Account ID**: Organization identifier (e.g., `cimic` or `enterprise`).
+- **Web Map Item ID or URL**: The secured web map to load (e.g., `d7d5b2a4502b49d0934a1fb5bddd9a97`).
+
+Or execute directly via non-interactive CLI flags:
+```bash
+npm run auth:portal -- \
+  --portal https://gis-prod.cimic.com.au/Portal \
+  --app-id wXfL4Me24ZkSoALH \
+  --account-id cimic \
+  --webmap d7d5b2a4502b49d0934a1fb5bddd9a97
+```
+
+#### Step 3: Start Development Server
+```bash
+npm start
+```
+When accessing `https://localtest.me:3001/`, VertiGIS Web automatically triggers the official ArcGIS Enterprise Portal OAuth popup/redirect flow instead of prompting for basic username/password credentials.
+
+#### How It Works Under the Hood
+1. **`app/auth/portal.json`**: Generated with `{ portal, appId, clientId, accountId }` conforming strictly to VertiGIS Web's native schema parser.
+2. **`webpack.config.js` Middleware**: The dev server's `portal-auth-interceptor` automatically intercepts `/viewer/auth/portal.json` and serves `app/auth/portal.json` and `app/oauth_callback.html`.
+3. **`src/auth/index.ts`**: The extension entry point initializes `esriConfig.portalUrl`, registers `esriConfig.request.trustedServers`, and registers `OAuthInfo` in `IdentityManager`.
+4. **Reverting to Defaults**: Run `npm run auth:portal -- --reset` to revert back to public sample ArcGIS Online maps at any time.
 
 **Hosting Requirements**:
 - Host over **HTTPS** with a valid SSL certificate.
