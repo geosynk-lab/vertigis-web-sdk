@@ -177,7 +177,7 @@ This SDK includes an automated configuration wizard that sets up seamless OAuth 
 3. Under **Redirect URIs**, add the following development endpoints:
    - `https://localtest.me:3001`
    - `https://localtest.me:3001/oauth_callback.html`
-4. Copy the generated **App ID / Client ID** (e.g., `wXfL4Me24ZkSoALH`).
+4. Copy the generated **App ID / Client ID** (e.g., `myPortalAppId123`).
 
 #### Step 2: Run the Automated Portal Configurator
 Run the interactive configurator in your project:
@@ -185,18 +185,18 @@ Run the interactive configurator in your project:
 npm run auth:portal
 ```
 You will be prompted for:
-- **Portal URL**: Your Enterprise Portal instance (e.g., `https://gis-prod.cimic.com.au/Portal`).
+- **Portal URL**: Your Enterprise Portal instance (e.g., `https://gis.{org}.com/portal`).
 - **App ID (Client ID)**: The App ID obtained from Step 1.
-- **Account ID**: Organization identifier (e.g., `cimic` or `enterprise`).
-- **Web Map Item ID or URL**: The secured web map to load (e.g., `d7d5b2a4502b49d0934a1fb5bddd9a97`).
+- **Account ID**: Organization identifier (e.g., `{org}` or `enterprise`).
+- **Web Map Item ID or URL**: The secured web map to load (e.g., `4f970e5d0a684b0f9f30cf00fa0119e6`).
 
 Or execute directly via non-interactive CLI flags:
 ```bash
 npm run auth:portal -- \
-  --portal https://gis-prod.cimic.com.au/Portal \
-  --app-id wXfL4Me24ZkSoALH \
-  --account-id cimic \
-  --webmap d7d5b2a4502b49d0934a1fb5bddd9a97
+  --portal https://gis.{org}.com/portal \
+  --app-id myPortalAppId123 \
+  --account-id {org} \
+  --webmap 4f970e5d0a684b0f9f30cf00fa0119e6
 ```
 
 #### Step 3: Start Development Server

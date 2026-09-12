@@ -37,7 +37,7 @@ Examples:
     npm run auth:portal
 
   Direct CLI Mode:
-    npm run auth:portal -- --portal https://gis.example.com/portal --app-id MyClientId123 --webmap d7d5b2a4502b49d0934a1fb5bddd9a97
+    npm run auth:portal -- --portal https://gis.example.com/portal --app-id MyClientId123 --webmap 4f970e5d0a684b0f9f30cf00fa0119e6
 
   Reset to Defaults:
     npm run auth:portal -- --reset
@@ -133,7 +133,7 @@ async function main() {
             portalUrl = portalUrl || await prompt(
                 rl,
                 "ArcGIS Enterprise Portal or AGOL URL",
-                existingConfig.portal || "https://gis-prod.cimic.com.au/Portal"
+                existingConfig.portal || "https://gis.{org}.com/portal"
             );
 
             appId = appId || await prompt(
