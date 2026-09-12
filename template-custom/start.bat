@@ -1,12 +1,14 @@
 @echo off
 setlocal enabledelayedexpansion
-set PORT=3000
 echo ========================================================
 echo   VertiGIS Studio Web SDK Development Server
+echo   Serving: https://localtest.me:3001 & https://localhost:3000
 echo ========================================================
-for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":%PORT% " ^| findstr "LISTENING"') do (
-    echo Terminating PID %%a on port %PORT%...
-    taskkill /F /PID %%a >nul 2>&1
+for %%P in (3001 3000) do (
+    for /f "tokens=5" %%a in ('netstat -aon ^| findstr ":%%P " ^| findstr "LISTENING"') do (
+        echo Terminating PID %%a on port %%P...
+        taskkill /F /PID %%a >nul 2>&1
+    )
 )
 if exist "certs\generate-cert.bat" (
     call "certs\generate-cert.bat"
