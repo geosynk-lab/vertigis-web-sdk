@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<layout xmlns="https://geocortex.com/layout/v1"
+        xmlns:custom="custom.widgets">
+    <split resizable="true">
+        <panel width="24" active="true">
+            <custom:custom-widget config="custom-widget-1" />
+        </panel>
+        <map grow="1" />
+    </split>
+</layout>
