@@ -55,7 +55,7 @@ npx @geosynk/vertigis-web-sdk create my-web-library
 
 ### Option B: Direct from GitHub (Zero Registry / No NPM Publish Required)
 ```bash
-npx github:davekazemi/vertigis-web-sdk create my-web-library
+npx github:geosynk-lab/vertigis-web-sdk create my-web-library
 ```
 
 ### Option C: Local Linked SDK (Instant Local Development)
@@ -241,11 +241,11 @@ When accessing `https://localtest.me:3001/`, VertiGIS Web automatically triggers
 
 ### 6. AI Coding Assistant Skills (Antigravity, Cursor, Claude Code)
 
-This SDK integrates directly with the [VertiGIS SDK Skills repository](https://github.com/davekazemi/vertigis-sdk-skills).
+This SDK integrates directly with the [VertiGIS SDK Skills repository](https://github.com/geosynk-lab/vertigis-sdk-skills).
 
 During project creation, you will be prompted:
 ```text
-? Would you like to install AI coding assistant skills from https://github.com/davekazemi/vertigis-sdk-skills into this project? [Y/n]
+? Would you like to install AI coding assistant skills from https://github.com/geosynk-lab/vertigis-sdk-skills into this project? [Y/n]
 ```
 If accepted, the `vertigis-web-sdk-skill` is automatically installed into `./.agents/skills/` using the standard `skills` tool (`npx skills add`).
 
@@ -280,7 +280,7 @@ Or run the parent batch synchronizer:
 
 - [VertiGIS Studio Web Developer Center](https://developers.vertigisstudio.com/docs/web/overview/)
 - [VertiGIS Studio Workflow TypeScript SDK Overview](https://developers.vertigisstudio.com/docs/workflow/sdk-web-overview)
-- [VertiGIS Web SDK Skill Reference Guide](https://github.com/davekazemi/vertigis-sdk-skills)
+- [VertiGIS Web SDK Skill Reference Guide](https://github.com/geosynk-lab/vertigis-sdk-skills)
 
 ---
 

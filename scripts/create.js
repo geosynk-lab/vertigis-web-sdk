@@ -95,8 +95,8 @@ if (fs.existsSync(customTemplateDir) && fs.existsSync(targetPath)) {
             pkg.scripts = pkg.scripts || {};
             pkg.scripts["cert:gen"] = "bash ./certs/generate-cert.sh";
             pkg.scripts["auth:portal"] = "node ./scripts/configure-portal.js";
-            pkg.scripts["skill:add"] = "npx --yes skills add davekazemi/vertigis-sdk-skills --skill vertigis-web-sdk-skill -y";
-            pkg.scripts["skills:add"] = "npx --yes skills add davekazemi/vertigis-sdk-skills -y";
+            pkg.scripts["skill:add"] = "npx --yes skills add geosynk-lab/vertigis-sdk-skills --skill vertigis-web-sdk-skill -y";
+            pkg.scripts["skills:add"] = "npx --yes skills add geosynk-lab/vertigis-sdk-skills -y";
 
             fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 4) + "\n", "utf-8");
             console.log("[ENTERPRISE] Added enterprise dependencies, auth:portal, and skill:add scripts to package.json");
@@ -120,7 +120,7 @@ if (fs.existsSync(customTemplateDir) && fs.existsSync(targetPath)) {
         }
     }
 
-    // 5. Prompt to install AI Coding Assistant Skill (https://github.com/davekazemi/vertigis-sdk-skills)
+    // 5. Prompt to install AI Coding Assistant Skill (https://github.com/geosynk-lab/vertigis-sdk-skills)
     let shouldInstallSkill = false;
     if (process.argv.includes("--skills") || process.argv.includes("--with-skills")) {
         shouldInstallSkill = true;
@@ -133,7 +133,7 @@ if (fs.existsSync(customTemplateDir) && fs.existsSync(targetPath)) {
         });
         const answer = await new Promise(resolve => {
             rl.question(
-                "\n? Would you like to install AI coding assistant skills from https://github.com/davekazemi/vertigis-sdk-skills into this project? [Y/n] ",
+                "\n? Would you like to install AI coding assistant skills from https://github.com/geosynk-lab/vertigis-sdk-skills into this project? [Y/n] ",
                 ans => {
                     rl.close();
                     resolve(ans.trim());
@@ -148,7 +148,7 @@ if (fs.existsSync(customTemplateDir) && fs.existsSync(targetPath)) {
     if (shouldInstallSkill) {
         console.log("\n[SKILLS] Installing VertiGIS Web SDK skill into project repository via npx skills add...");
         try {
-            execSync("npx --yes skills add davekazemi/vertigis-sdk-skills --skill vertigis-web-sdk-skill -y", {
+            execSync("npx --yes skills add geosynk-lab/vertigis-sdk-skills --skill vertigis-web-sdk-skill -y", {
                 stdio: "inherit",
                 cwd: targetPath,
             });
