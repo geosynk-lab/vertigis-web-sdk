@@ -1,18 +1,18 @@
 <p align="center">
   <a href="https://geosynk.com.au/" target="_blank" rel="noopener noreferrer">
-    <img src="https://geosynk.com.au/images/logo/LOGO_MAIN1.svg" alt="GeoSynk" width="380" />
+    <img src="https://geosynk.com.au/images/logo/LOGO_MAIN1.svg" alt="Geosynk" width="380" />
   </a>
 </p>
 
 # VertiGIS Studio Web SDK (Enterprise Edition)
 
-[![Maintained by GeoSynk](https://img.shields.io/badge/maintained%20by-GeoSynk-f47c22.svg)](https://geosynk.com.au/)
+[![Maintained by Geosynk](https://img.shields.io/badge/maintained%20by-Geosynk-f47c22.svg)](https://geosynk.com.au/)
 [![NPM Version](https://img.shields.io/npm/v/@geosynk/vertigis-web-sdk.svg?color=cb3837)](https://www.npmjs.com/package/@geosynk/vertigis-web-sdk)
 [![Upstream Sync](https://img.shields.io/badge/upstream-vertigis%2Fvertigis--web--sdk-blue.svg)](https://github.com/vertigis/vertigis-web-sdk)
 [![Enterprise Ready](https://img.shields.io/badge/architecture-enterprise--overlay-green.svg)](#enterprise-architectural-features)
 [![WCAG AA](https://img.shields.io/badge/accessibility-WCAG%20AA-success.svg)](#1-centralized-design-token-subsystem)
 
-An enterprise-enhanced fork of the official [VertiGIS Studio Web SDK](https://vertigisstudio.com/products/vertigis-studio-web/), maintained and engineered by [GeoSynk](https://geosynk.com.au/) (Davood Kazemi). This repository bootstraps production-grade extension libraries pre-configured with centralized design tokens, dynamic light/dark theming, strict anti-god-component architecture, automated OpenSSL certificates, and AI assistant directives (`AGENTS.md`), while preserving 100% compatibility with official VertiGIS upstream updates.
+An enterprise-enhanced fork of the official [VertiGIS Studio Web SDK](https://vertigisstudio.com/products/vertigis-studio-web/), maintained and engineered by [Geosynk](https://geosynk.com.au/) (Davood Kazemi). This repository bootstraps production-grade extension libraries pre-configured with centralized design tokens, dynamic light/dark theming, strict anti-god-component architecture, automated OpenSSL certificates, and AI assistant directives (`AGENTS.md`), while preserving 100% compatibility with official VertiGIS upstream updates.
 
 ---
 
@@ -141,9 +141,9 @@ Or run the parent batch synchronizer:
 
 ---
 
-## About GeoSynk
+## About Geosynk
 
-This project is curated and maintained by [GeoSynk](https://geosynk.com.au/), an Australian geospatial software consultancy founded by Davood Kazemi. GeoSynk specializes in enterprise GIS solutions, custom VertiGIS Studio integrations, Esri ArcGIS architecture, and automated cloud deployments.
+This project is curated and maintained by [Geosynk](https://geosynk.com.au/), an Australian geospatial software consultancy founded by Davood Kazemi. Geosynk specializes in enterprise GIS solutions, custom VertiGIS Studio integrations, Esri ArcGIS architecture, and automated cloud deployments.
 
 - **Website**: [https://geosynk.com.au](https://geosynk.com.au/)
 - **Contact**: [davood@geosynk.com.au](mailto:davood@geosynk.com.au)

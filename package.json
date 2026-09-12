@@ -9,7 +9,7 @@
         "type": "git",
         "url": "git+https://github.com/davekazemi/vertigis-web-sdk.git"
     },
-    "author": "VertiGIS Ltd. / Davood Kazemi (GeoSynk)",
+    "author": "VertiGIS Ltd. / Davood Kazemi (Geosynk)",
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/davekazemi/vertigis-web-sdk/issues"
