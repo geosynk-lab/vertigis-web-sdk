@@ -118,6 +118,56 @@ my-web-library/
 
 ---
 
+## Developer Guide: Building & Deploying Web Extensions
+
+> Official Reference: [VertiGIS Studio Web SDK Overview](https://developers.vertigisstudio.com/docs/web/overview/) & [Workflow TypeScript SDK Overview](https://developers.vertigisstudio.com/docs/workflow/sdk-web-overview)
+
+### 1. Extension Architecture & Decomposition
+The Web SDK compiles custom UI widgets, services, and commands into a loadable VertiGIS Studio Web library:
+- **MobX Component Models (`*Model.ts`)**: Encapsulate application state, services injection, and event management.
+- **React Views (`*.tsx`)**: Presentational UI wrapping controls with accessibility attributes, design tokens (`src/tokens/`), and dynamic theme adaptation (`useIsDarkTheme`).
+- **Error Boundaries**: Isolate widget failures to avoid crashing the surrounding VertiGIS Studio Web shell.
+- **Custom Services & Commands**: Register app-wide singleton services and commands via `@vertigis/web/messaging`.
+
+### 2. Simultaneous Dual-Port Development Server
+Start the development server with automatic SAN SSL certificate validation:
+```bash
+./start.sh      # Linux / macOS
+start.bat       # Windows
+# or: npm start
+```
+- **Dual-Port Accessibility**:
+  - Primary endpoint: `https://localtest.me:3001/main.js` (avoids ArcGIS Portal private network & CORS restrictions).
+  - Auxiliary bridge: `https://localhost:3000/main.js` (guarantees legacy app configuration compatibility).
+- Pre-configured with CORS and Private Network Access (`Access-Control-Allow-Private-Network: true`) headers.
+
+### 3. Registering Custom Web Extensions in VertiGIS Studio Web
+To consume your custom extensions inside VertiGIS Studio Web applications:
+1. Open your target application in **VertiGIS Studio Web Designer**.
+2. Navigate to **App Settings** > **Custom Libraries**.
+3. Add your development URL:
+   - `https://localtest.me:3001/main.js` (or `https://localhost:3000/main.js`)
+4. Add the component to your application layout XML (`layout.xml`) or configuration (`app.json`).
+5. Reload the Designer app to view live hot-reloaded changes.
+
+### 4. Production Build & Hosting
+Compile production artifacts:
+```bash
+./build.sh      # Linux / macOS
+build.bat       # Windows
+# or: npm run build
+```
+Outputs optimized bundles to `build/`:
+- `build/main.js` & `build/<project-name>.js`: Minified production bundle
+- `build/<project-name>.js.txt`: Script text artifact for hosting in strict web environments requiring `.txt` extensions
+
+**Hosting Requirements**:
+- Host over **HTTPS** with a valid SSL certificate.
+- Configure web server headers for Cross-Origin Resource Sharing (`Access-Control-Allow-Origin: *`).
+- Update your VertiGIS Web Designer custom library URL to point to your production URL `https://your-server.com/path/<project-name>.js`.
+
+---
+
 ## Upstream Synchronization
 
 This fork tracks official updates from `https://github.com/vertigis/vertigis-web-sdk.git`. Because enterprise templates are maintained in the isolated `template-custom/` overlay directory, upstream merges execute cleanly without merge conflicts:
@@ -136,15 +186,25 @@ Or run the parent batch synchronizer:
 
 ## Documentation
 
-- [VertiGIS Studio Developer Center](https://developers.vertigisstudio.com/docs/web/overview/)
+- [VertiGIS Studio Web Developer Center](https://developers.vertigisstudio.com/docs/web/overview/)
+- [VertiGIS Studio Workflow TypeScript SDK Overview](https://developers.vertigisstudio.com/docs/workflow/sdk-web-overview)
 - [VertiGIS Web SDK Skill Reference Guide](https://github.com/davekazemi/vertigis-sdk-skills)
 
 ---
 
 ## About Geosynk
 
-This project is curated and maintained by [Geosynk](https://geosynk.com.au/), an Australian geospatial software consultancy founded by Davood Kazemi. Geosynk specializes in enterprise GIS solutions, custom VertiGIS Studio integrations, Esri ArcGIS architecture, and automated cloud deployments.
+[Geosynk](https://geosynk.com.au/) is an Australian geospatial engineering and software consultancy founded by Davood Kazemi, delivering enterprise GIS architecture, custom VertiGIS solutions, and modern web applications.
 
+### Core Capabilities & Topics
+
+- **VertiGIS Studio Engineering**: Turnkey Web SDK components, custom Workflow activities, accessible form elements, report templates, and automated printing services.
+- **Esri ArcGIS Enterprise**: End-to-end cloud and on-premises architecture, Enterprise Geodatabase design, Utility Network migrations, and ArcGIS Experience Builder extensions.
+- **Full-Stack Spatial Systems**: High-performance React, TypeScript, Node.js, WebGL, and Leaflet/Mapbox interactive web applications.
+- **Spatial DevOps & Automation**: Automated CI/CD pipelines, automated testing, containerized GIS deployments, and infrastructure as code across AWS and Microsoft Azure.
+
+### Connect with Geosynk
 - **Website**: [https://geosynk.com.au](https://geosynk.com.au/)
-- **Contact**: [davood@geosynk.com.au](mailto:davood@geosynk.com.au)
+- **Contact & Inquiries**: [davood@geosynk.com.au](mailto:davood@geosynk.com.au)
+
 
