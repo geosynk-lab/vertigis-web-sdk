@@ -177,7 +177,7 @@ This SDK includes an automated configuration wizard that sets up seamless OAuth 
 3. Under **Redirect URIs**, add the following development endpoints:
    - `https://localtest.me:3001`
    - `https://localtest.me:3001/oauth_callback.html`
-4. Copy the generated **App ID / Client ID** (e.g., `myPortalAppId123`).
+4. Copy the generated **Client ID** (App ID) (e.g., `myClientId123`).
 
 #### Step 2: Run the Automated Portal Configurator
 Run the interactive configurator in your project:
@@ -186,7 +186,7 @@ npm run auth:portal
 ```
 You will be prompted for:
 - **Portal URL** `[Required]`: Your Enterprise Portal instance (e.g., `https://gis.{org}.com/portal`).
-- **App ID (Client ID)** `[Required]`: The App ID obtained from Step 1.
+- **Client ID** `[Required]`: The OAuth Application Client ID obtained from Step 1.
 - **Account ID** `[Optional]`: Organization identifier (e.g., `{org}` or `enterprise`).
 - **Web Map Item ID or URL** `[Optional]`: If provided, automatically updates `webMap` in `app/app.json`. If omitted, your current `app.json` remains untouched.
 
@@ -195,14 +195,15 @@ Or execute directly via non-interactive CLI flags:
 # Minimal (configures Portal OAuth, leaves current app.json untouched):
 npm run auth:portal -- \
   --portal https://gis.{org}.com/portal \
-  --app-id myPortalAppId123
+  --client-id myClientId123
 
 # Full (configures Portal OAuth AND updates app.json web map):
 npm run auth:portal -- \
   --portal https://gis.{org}.com/portal \
-  --app-id myPortalAppId123 \
+  --client-id myClientId123 \
   --webmap 4f970e5d0a684b0f9f30cf00fa0119e6
 ```
+*(Note: `--app-id` and `--clientId` are also supported as aliases).*
 
 #### Step 3: Start Development Server
 ```bash

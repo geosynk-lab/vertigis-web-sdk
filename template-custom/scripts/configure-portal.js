@@ -26,7 +26,7 @@ Usage:
 
 Options:
   --portal <url>        [Required] ArcGIS Enterprise Portal or AGOL URL (e.g. https://gis.{org}.com/portal)
-  --app-id <id>         [Required] Portal OAuth Application Client ID / App ID
+  --client-id <id>      [Required] Portal OAuth Application Client ID
   --account-id <id>     [Optional] Account ID / Org slug (default: derived from hostname or "enterprise")
   --webmap <id-or-url>  [Optional] Web Map Item ID or full URL to update in app.json
   --reset               Revert back to public sample ArcGIS Online map and disable portal auth
@@ -37,7 +37,7 @@ Examples:
     npm run auth:portal
 
   Direct CLI Mode:
-    npm run auth:portal -- --portal https://gis.example.com/portal --app-id MyClientId123 --webmap 4f970e5d0a684b0f9f30cf00fa0119e6
+    npm run auth:portal -- --portal https://gis.{org}.com/portal --client-id myClientId123
 
   Reset to Defaults:
     npm run auth:portal -- --reset
@@ -107,7 +107,7 @@ async function main() {
     }
 
     let portalUrl = getArgValue("--portal");
-    let appId = getArgValue("--app-id") || getArgValue("--client-id");
+    let appId = getArgValue("--client-id") || getArgValue("--clientId") || getArgValue("--app-id");
     let accountId = getArgValue("--account-id");
     let webMap = getArgValue("--webmap") || getArgValue("--webMap");
 
@@ -138,12 +138,12 @@ async function main() {
 
             appId = appId || await prompt(
                 rl,
-                "Portal OAuth Application App ID (Client ID)",
-                existingConfig.appId || ""
+                "Portal OAuth Application Client ID",
+                existingConfig.clientId || existingConfig.appId || ""
             );
 
             if (!appId) {
-                console.error("\n✖ Error: App ID (Client ID) is required to configure OAuth.");
+                console.error("\n✖ Error: Client ID is required to configure OAuth.");
                 rl.close();
                 process.exit(1);
             }
@@ -253,7 +253,7 @@ async function main() {
     console.log("  [SUCCESS] ArcGIS Enterprise Portal Authentication Configured!");
     console.log("================================================================================");
     console.log(`  - Portal:     ${portalUrl}`);
-    console.log(`  - App ID:     ${appId}`);
+    console.log(`  - Client ID:  ${appId}`);
     console.log(`  - Account ID: ${accountId}`);
     if (webMap) {
         console.log(`  - Web Map:    ${webMap}`);
