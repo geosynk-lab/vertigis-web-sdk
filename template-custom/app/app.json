@@ -6,16 +6,7 @@
       "id": "default",
       "basemapOptions": [
         "item://basemap-extension/56dde2e7-0047-4329-a079-106fe14c4683",
-        "item://basemap-extension/24bb022a-9fa2-4e07-b107-4ac2e42f7602",
-        "item://basemap-extension/04f17474-6db3-414d-9ff6-d024096a5c10",
-        "item://basemap-extension/a10518b2-8327-4f6e-80e1-d6a5df4702be",
-        "item://basemap-extension/9c117326-bed6-4c99-a4d5-47658751c16a",
-        "item://basemap-extension/1e4d2dbb-0fc7-4187-a89b-a0ab3f5ea016",
-        "item://basemap-extension/0057950b-c816-476d-9f63-f54166ffb48d",
-        "item://basemap-extension/84f3d44e-74fd-4181-9cca-3fea5080bac7",
-        "item://basemap-extension/fa130a15-e3ea-4e14-932c-3171b7fd07cd",
-        "item://basemap-extension/f7b5b0bb-f066-420f-b706-3028c3f04f28",
-        "item://basemap-extension/8962b8cc-a188-4bd0-adc2-c95ed4c34504"
+        "item://basemap-extension/24bb022a-9fa2-4e07-b107-4ac2e42f7602"
       ],
       "groundExtension": "item://ground-extension/7dd61cce-9f0c-4abc-9bad-84587f96080f",
       "webMap": "https://www.arcgis.com/home/item.html?id=b834a68d7a484c5fb473d4ba90d35e71",
@@ -71,6 +62,7 @@
       "id": "24bb022a-9fa2-4e07-b107-4ac2e42f7602",
       "iconUrl": "./static/arcgis-js-api/esri/images/basemap/streets-vector.jpg",
       "basemap": {
+        "title": "Streets",
         "baseMapLayers": [
           {
             "id": "streets-vector-base-layer",
@@ -78,8 +70,7 @@
             "layerType": "VectorTileLayer",
             "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/de26a3cf4cc9451298ea173c4b324736/resources/styles/root.json"
           }
-        ],
-        "title": "Streets"
+        ]
       },
       "baseLayerExtensions": [
         "item://layer-extension/2839cd0d-57e0-4a75-8f85-66bc9d15548c"
@@ -97,487 +88,6 @@
           "title": "World Street Map",
           "subtype": null,
           "url": "https://cdn.arcgis.com/sharing/rest/content/items/de26a3cf4cc9451298ea173c4b324736/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "04f17474-6db3-414d-9ff6-d024096a5c10",
-      "iconUrl": "./static/arcgis-js-api/esri/images/basemap/streets-navigation.jpg",
-      "basemap": {
-        "baseMapLayers": [
-          {
-            "id": "streets-navigation-vector-base-layer",
-            "title": "World Navigation Map",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/63c47b7177f946b49902c24129b87252/resources/styles/root.json"
-          }
-        ],
-        "title": "World Navigation Map"
-      },
-      "baseLayerExtensions": [
-        "item://layer-extension/83efbbfb-ab3e-4eeb-9ef3-3d42cb35e631"
-      ],
-      "$type": "basemap-extension"
-    },
-    {
-      "id": "83efbbfb-ab3e-4eeb-9ef3-3d42cb35e631",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "streets-navigation-vector-base-layer",
-          "title": "World Navigation Map",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/63c47b7177f946b49902c24129b87252/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "a10518b2-8327-4f6e-80e1-d6a5df4702be",
-      "iconUrl": "./static/arcgis-js-api/esri/images/basemap/streets-night.jpg",
-      "basemap": {
-        "baseMapLayers": [
-          {
-            "id": "streets-night-vector-base-layer",
-            "title": "World Street Map (Night)",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/86f556a2d1fd468181855a35e344567f/resources/styles/root.json"
-          }
-        ],
-        "title": "World Street Map (Night)"
-      },
-      "baseLayerExtensions": [
-        "item://layer-extension/38a8e6fe-d0a3-4c9d-b06d-f0d0cf73199d"
-      ],
-      "$type": "basemap-extension"
-    },
-    {
-      "id": "38a8e6fe-d0a3-4c9d-b06d-f0d0cf73199d",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "streets-night-vector-base-layer",
-          "title": "World Street Map (Night)",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/86f556a2d1fd468181855a35e344567f/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "9c117326-bed6-4c99-a4d5-47658751c16a",
-      "iconUrl": "./static/arcgis-js-api/esri/images/basemap/dark-gray-vector.jpg",
-      "basemap": {
-        "baseMapLayers": [
-          {
-            "id": "dark-gray-base-layer",
-            "title": "Dark Gray Base",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/5e9b3685f4c24d8781073dd928ebda50/resources/styles/root.json"
-          },
-          {
-            "id": "dark-gray-reference-layer",
-            "title": "Dark Gray Reference",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/747cb7a5329c478cbe6981076cc879c5/resources/styles/root.json",
-            "isReference": true
-          }
-        ],
-        "title": "Dark Gray Canvas"
-      },
-      "baseLayerExtensions": [
-        "item://layer-extension/1543445c-2380-4ff6-8e47-8c900314d333"
-      ],
-      "referenceLayerExtensions": [
-        "item://layer-extension/bbf20b04-e7f6-4609-82e1-ea9a2f6cc037"
-      ],
-      "$type": "basemap-extension"
-    },
-    {
-      "id": "1543445c-2380-4ff6-8e47-8c900314d333",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "dark-gray-base-layer",
-          "title": "Dark Gray Base",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/5e9b3685f4c24d8781073dd928ebda50/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "bbf20b04-e7f6-4609-82e1-ea9a2f6cc037",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "dark-gray-reference-layer",
-          "title": "Dark Gray Reference",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/747cb7a5329c478cbe6981076cc879c5/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "1e4d2dbb-0fc7-4187-a89b-a0ab3f5ea016",
-      "iconUrl": "./static/arcgis-js-api/esri/images/basemap/gray-vector.jpg",
-      "basemap": {
-        "baseMapLayers": [
-          {
-            "id": "gray-base-layer",
-            "title": "Light Gray Base",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/291da5eab3a0412593b66d384379f89f/resources/styles/root.json"
-          },
-          {
-            "id": "gray-reference-layer",
-            "title": "Light Gray Reference",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/1768e8369a214dfab4e2167d5c5f2454/resources/styles/root.json",
-            "isReference": true
-          }
-        ],
-        "title": "Light Gray Canvas"
-      },
-      "baseLayerExtensions": [
-        "item://layer-extension/cb65ea39-32ea-4db8-a3e3-b0788e8cc543"
-      ],
-      "referenceLayerExtensions": [
-        "item://layer-extension/ebbe1f42-9636-459e-b9a4-878632eb4fb5"
-      ],
-      "$type": "basemap-extension"
-    },
-    {
-      "id": "cb65ea39-32ea-4db8-a3e3-b0788e8cc543",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "gray-base-layer",
-          "title": "Light Gray Base",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/291da5eab3a0412593b66d384379f89f/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "ebbe1f42-9636-459e-b9a4-878632eb4fb5",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "gray-reference-layer",
-          "title": "Light Gray Reference",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/1768e8369a214dfab4e2167d5c5f2454/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "0057950b-c816-476d-9f63-f54166ffb48d",
-      "iconUrl": "./static/arcgis-js-api/esri/images/basemap/satellite.jpg",
-      "basemap": {
-        "baseMapLayers": [
-          {
-            "id": "satellite-base-layer",
-            "showLegend": false,
-            "title": "World Imagery",
-            "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
-            "layerType": "ArcGISTiledMapServiceLayer"
-          }
-        ],
-        "title": "Imagery"
-      },
-      "baseLayerExtensions": [
-        "item://layer-extension/64a80828-9b7e-43d6-866b-edb37cbf5820"
-      ],
-      "$type": "basemap-extension"
-    },
-    {
-      "id": "64a80828-9b7e-43d6-866b-edb37cbf5820",
-      "layer": {
-        "$ref": {
-          "id": "satellite-base-layer",
-          "title": "World Imagery",
-          "subtype": null,
-          "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
-        },
-        "layerType": "ArcGISTiledMapServiceLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "84f3d44e-74fd-4181-9cca-3fea5080bac7",
-      "iconUrl": "./static/arcgis-js-api/esri/images/basemap/hybrid.jpg",
-      "basemap": {
-        "baseMapLayers": [
-          {
-            "id": "hybrid-base-layer",
-            "showLegend": false,
-            "title": "World Imagery",
-            "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer",
-            "layerType": "ArcGISTiledMapServiceLayer"
-          },
-          {
-            "id": "hybrid-reference-layer",
-            "title": "Hybrid Reference Layer",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/30d6b8271e1849cd9c3042060001f425/resources/styles/root.json",
-            "isReference": true
-          }
-        ],
-        "title": "Imagery with Labels"
-      },
-      "baseLayerExtensions": [
-        "item://layer-extension/313a5e5e-9707-45aa-ba41-054131ea8ee4"
-      ],
-      "referenceLayerExtensions": [
-        "item://layer-extension/9fc58902-8bc1-46b1-964d-ea0beeea9df3"
-      ],
-      "$type": "basemap-extension"
-    },
-    {
-      "id": "313a5e5e-9707-45aa-ba41-054131ea8ee4",
-      "layer": {
-        "$ref": {
-          "id": "hybrid-base-layer",
-          "title": "World Imagery",
-          "subtype": null,
-          "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
-        },
-        "layerType": "ArcGISTiledMapServiceLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "9fc58902-8bc1-46b1-964d-ea0beeea9df3",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "hybrid-reference-layer",
-          "title": "Hybrid Reference Layer",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/30d6b8271e1849cd9c3042060001f425/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "fa130a15-e3ea-4e14-932c-3171b7fd07cd",
-      "iconUrl": "./static/arcgis-js-api/esri/images/basemap/topo-vector.jpg",
-      "basemap": {
-        "baseMapLayers": [
-          {
-            "id": "world-hillshade-layer",
-            "showLegend": false,
-            "title": "World Hillshade",
-            "url": "https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer",
-            "layerType": "ArcGISTiledMapServiceLayer"
-          },
-          {
-            "id": "topo-vector-base-layer",
-            "title": "World Topographic Map",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/7dc6cea0b1764a1f9af2e679f642f0f5/resources/styles/root.json"
-          }
-        ],
-        "title": "Topographic"
-      },
-      "baseLayerExtensions": [
-        "item://layer-extension/0420d0f3-ecdb-4c7e-8ed1-a0fabac8e5fe",
-        "item://layer-extension/3ce31ae1-0213-42c9-b65f-c2555f57e430"
-      ],
-      "$type": "basemap-extension"
-    },
-    {
-      "id": "0420d0f3-ecdb-4c7e-8ed1-a0fabac8e5fe",
-      "layer": {
-        "$ref": {
-          "id": "world-hillshade-layer",
-          "title": "World Hillshade",
-          "subtype": null,
-          "url": "https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer"
-        },
-        "layerType": "ArcGISTiledMapServiceLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "3ce31ae1-0213-42c9-b65f-c2555f57e430",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "topo-vector-base-layer",
-          "title": "World Topographic Map",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/7dc6cea0b1764a1f9af2e679f642f0f5/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "f7b5b0bb-f066-420f-b706-3028c3f04f28",
-      "iconUrl": "./static/arcgis-js-api/esri/images/basemap/terrain.jpg",
-      "basemap": {
-        "baseMapLayers": [
-          {
-            "id": "world-hillshade",
-            "showLegend": false,
-            "title": "World Hillshade",
-            "url": "https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer",
-            "layerType": "ArcGISTiledMapServiceLayer"
-          },
-          {
-            "id": "terrain-base-layer",
-            "title": "World Terrain Base",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/33064a20de0c48d2bb61efa8faca93a8/resources/styles/root.json"
-          },
-          {
-            "id": "terrain-reference-layer",
-            "title": "World Terrain Reference",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/14fbc125ccc9488888b014db09f35f67/resources/styles/root.json",
-            "isReference": true
-          }
-        ],
-        "title": "Terrain with Labels"
-      },
-      "baseLayerExtensions": [
-        "item://layer-extension/955a612f-b7c7-4d28-86f0-6aa5a0d59f47",
-        "item://layer-extension/0b83a2ae-a276-4a27-a991-9a9203036c87"
-      ],
-      "referenceLayerExtensions": [
-        "item://layer-extension/48479f06-e8da-4f22-acdc-bfbf426ef3e6"
-      ],
-      "$type": "basemap-extension"
-    },
-    {
-      "id": "955a612f-b7c7-4d28-86f0-6aa5a0d59f47",
-      "layer": {
-        "$ref": {
-          "id": "world-hillshade",
-          "title": "World Hillshade",
-          "subtype": null,
-          "url": "https://services.arcgisonline.com/arcgis/rest/services/Elevation/World_Hillshade/MapServer"
-        },
-        "layerType": "ArcGISTiledMapServiceLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "0b83a2ae-a276-4a27-a991-9a9203036c87",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "terrain-base-layer",
-          "title": "World Terrain Base",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/33064a20de0c48d2bb61efa8faca93a8/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "48479f06-e8da-4f22-acdc-bfbf426ef3e6",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "terrain-reference-layer",
-          "title": "World Terrain Reference",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/14fbc125ccc9488888b014db09f35f67/resources/styles/root.json"
-        },
-        "layerType": "VectorTileLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "8962b8cc-a188-4bd0-adc2-c95ed4c34504",
-      "iconUrl": "./static/arcgis-js-api/esri/images/basemap/oceans.jpg",
-      "basemap": {
-        "baseMapLayers": [
-          {
-            "id": "oceans-base-layer",
-            "showLegend": false,
-            "title": "World Ocean Base",
-            "url": "https://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Base/MapServer",
-            "layerType": "ArcGISTiledMapServiceLayer"
-          },
-          {
-            "id": "oceans-reference-layer",
-            "title": "World Ocean Reference",
-            "layerType": "VectorTileLayer",
-            "styleUrl": "https://cdn.arcgis.com/sharing/rest/content/items/89860a5baf424f3ea0c655115faababe/resources/styles/root.json",
-            "isReference": true
-          }
-        ],
-        "title": "Oceans"
-      },
-      "baseLayerExtensions": [
-        "item://layer-extension/3e297fe4-9a7b-4318-8c50-a7eb3200d44f"
-      ],
-      "referenceLayerExtensions": [
-        "item://layer-extension/26d48d71-19f2-4a7a-ad81-a7407f7c4aeb"
-      ],
-      "$type": "basemap-extension"
-    },
-    {
-      "id": "3e297fe4-9a7b-4318-8c50-a7eb3200d44f",
-      "layer": {
-        "$ref": {
-          "id": "oceans-base-layer",
-          "title": "World Ocean Base",
-          "subtype": null,
-          "url": "https://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Base/MapServer"
-        },
-        "layerType": "ArcGISTiledMapServiceLayer"
-      },
-      "$type": "layer-extension"
-    },
-    {
-      "id": "26d48d71-19f2-4a7a-ad81-a7407f7c4aeb",
-      "layerListSettings": {
-        "childrenIncluded": false
-      },
-      "layer": {
-        "$ref": {
-          "id": "oceans-reference-layer",
-          "title": "World Ocean Reference",
-          "subtype": null,
-          "url": "https://cdn.arcgis.com/sharing/rest/content/items/89860a5baf424f3ea0c655115faababe/resources/styles/root.json"
         },
         "layerType": "VectorTileLayer"
       },
@@ -654,7 +164,9 @@
         "language-designer-gen-4a52c284-ccb6-4a55-a8d6-94b632d838ed-title-po3v85": "Results List",
         "language-designer-gen-d14a8d22-a132-47cf-9d50-b9c759a97ebd-title-5b6mh4": "Results List",
         "language-designer-gen-e1c66411-032e-412a-b41f-b9892dd5246d-title-7chj0o": "Legend",
-        "language-designer-gen-589a9171-58ec-426f-8d3c-c9360652a9ba-title-lfu0rk": "Tabs"
+        "language-designer-gen-589a9171-58ec-426f-8d3c-c9360652a9ba-title-lfu0rk": "Tabs",
+        "language-designer-gen-4a24e1d3-4476-4d68-b9cd-477d07659b38-title-ajmena": "Rows",
+        "language-designer-gen-785ddd77-43a4-4f2d-bba8-132f9cf8ca16-title-mdb366": "Results Table"
       },
       "$type": "language-resources"
     },
@@ -984,13 +496,13 @@
       ],
       "alternate": {
         "title": "language-designer-gen-931927bb-e741-4ae8-ba08-e22b3daf8aa1-title-5khlzy",
+        "iconId": "theme-light",
         "action": [
           {
             "name": "ui.set-theme",
             "arguments": "light"
           }
-        ],
-        "iconId": "theme-light"
+        ]
       },
       "$type": "menu-item"
     },
@@ -1008,6 +520,7 @@
       ],
       "alternate": {
         "title": "language-designer-gen-undefined-menuitemalttitle-g1abaj",
+        "iconId": "activate",
         "action": [
           {
             "name": "ui.deactivate",
@@ -1015,8 +528,7 @@
               "component": "item://split/root"
             }
           }
-        ],
-        "iconId": "activate"
+        ]
       },
       "$type": "menu-item"
     },
@@ -1062,6 +574,22 @@
       "id": "589a9171-58ec-426f-8d3c-c9360652a9ba",
       "title": "language-designer-gen-589a9171-58ec-426f-8d3c-c9360652a9ba-title-lfu0rk",
       "$type": "tabs"
+    },
+    {
+      "id": "4a24e1d3-4476-4d68-b9cd-477d07659b38",
+      "title": "language-designer-gen-4a24e1d3-4476-4d68-b9cd-477d07659b38-title-ajmena",
+      "$type": "stack"
+    },
+    {
+      "id": "785ddd77-43a4-4f2d-bba8-132f9cf8ca16",
+      "icon": "clipboard-table",
+      "title": "language-designer-gen-785ddd77-43a4-4f2d-bba8-132f9cf8ca16-title-mdb366",
+      "featureActions": "item://menu/96f74426-0050-4881-8d60-17e031419940",
+      "$type": "results"
+    },
+    {
+      "id": "96f74426-0050-4881-8d60-17e031419940",
+      "$type": "menu"
     }
   ]
 }
