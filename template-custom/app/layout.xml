@@ -2,9 +2,9 @@
     <split id="split-a5817a92" resizable="true" config="root">
         <tabs xmlns="https://geocortex.com/layout/web/v1" id="tabs-543112c0" config="589a9171-58ec-426f-8d3c-c9360652a9ba" grow="0" width="30.714285714285715">
             <workflow xmlns="https://geocortex.com/layout/v1" id="workflow-3581b6f4" active="false" config="workflow-config-1"/>
-            <results-list xmlns="https://geocortex.com/layout/v1" id="results-list-b080e39e" config="d14a8d22-a132-47cf-9d50-b9c759a97ebd"/>
-            <results-list xmlns="https://geocortex.com/layout/v1" id="results-list-3662ab43" config="4a52c284-ccb6-4a55-a8d6-94b632d838ed"/>
-            <feature-details xmlns="https://geocortex.com/layout/v1" id="feature-details-ec4c6c29" config="333edeb8-b651-4d17-b361-46fc5603c71d"/>
+            <results-list xmlns="https://geocortex.com/layout/v1" id="results-list-b080e39e" config="d14a8d22-a132-47cf-9d50-b9c759a97ebd" active="false"/>
+            <results-list xmlns="https://geocortex.com/layout/v1" id="results-list-3662ab43" config="4a52c284-ccb6-4a55-a8d6-94b632d838ed"  active="false"/>
+            <feature-details xmlns="https://geocortex.com/layout/v1" id="feature-details-ec4c6c29" config="333edeb8-b651-4d17-b361-46fc5603c71d" active="false"/>
             <legend xmlns="https://geocortex.com/layout/v1" id="legend-ab7f8a19" config="e1c66411-032e-412a-b41f-b9892dd5246d" models="#map-primary"/>
             <layer-list xmlns="https://geocortex.com/layout/v1" id="layer-list-826e9f3a" config="c1aa340a-8a4c-4034-b397-f46157b14217" models="#map-primary"/>
         </tabs>
