@@ -18,7 +18,12 @@
         "prettier": "~3.5.3"
     },
     "overrides": {
-        "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.2/xlsx-0.20.2.tgz"
+        "xlsx": "npm:@e965/xlsx@^0.20.3"
+    },
+    "pnpm": {
+        "overrides": {
+            "xlsx": "npm:@e965/xlsx@^0.20.3"
+        }
     },
     "allowScripts": {
         "@mui/x-telemetry": false,

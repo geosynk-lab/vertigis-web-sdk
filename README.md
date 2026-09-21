@@ -52,6 +52,11 @@ Every project scaffolded from this repository includes:
 6. **Coding Assistant Governance (`AGENTS.md`)**:
    - Pre-injected VertiGIS Web SDK directives ensuring AI coding assistants (such as Antigravity, Claude Code, Cursor, Copilot) strictly follow typography rules, token usage, and file size limits.
 
+7. **Monorepo & Dual Package Manager Resilience (`npm` & `pnpm`)**:
+   - **SheetJS (`xlsx`) Registry Mirror**: Replaces upstream external HTTP CDN tarball URLs with `npm:@e965/xlsx@^0.20.3` registry overrides. 100% immune to corporate firewall/proxy blocks, checksum mismatches, and `pnpm` `ERR_PNPM_EXOTIC_SUBDEP` errors.
+   - **Monorepo `--skip-install` Support**: Scaffolds full enterprise project architecture without generating duplicate nested `node_modules`.
+   - **Native `pnpm` v11+ Compatibility**: Bundled with pre-configured `pnpm-workspace.yaml` for instant pnpm installations.
+
 ---
 
 ## Creating a New Project
@@ -74,6 +79,23 @@ npm link
 Then anywhere on your machine:
 ```bash
 vertigis-web-sdk create my-web-library
+```
+
+### Option D: Inside a Monorepo / Workspaces (Single Shared `node_modules`)
+To manage all libraries under a single `node_modules` at your workspace root:
+```bash
+# 1. Scaffold into your packages/ or projects/ folder without installing duplicate dependencies
+npx @geosynk/vertigis-web-sdk create my-web-library --skip-install
+
+# 2. Run install once at your monorepo root
+npm install
+# or
+pnpm install
+```
+
+### Option E: Direct with `pnpm`
+```bash
+npx @geosynk/vertigis-web-sdk create my-web-library --pnpm
 ```
 
 ---
