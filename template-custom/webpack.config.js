@@ -152,6 +152,21 @@ export default merge(defaultWebpackConfig, {
                             return;
                         }
                     }
+                    if (
+                        url === "/favicon.ico" ||
+                        url === "/favicon.svg" ||
+                        url === "/viewer/default-favicon.ico" ||
+                        url === "/viewer/favicon.ico"
+                    ) {
+                        const faviconPath = path.resolve(process.cwd(), "app/favicon.svg");
+                        if (fs.existsSync(faviconPath)) {
+                            res.setHeader("Content-Type", "image/svg+xml");
+                            res.setHeader("Access-Control-Allow-Origin", "*");
+                            res.setHeader("Cache-Control", "public, max-age=86400");
+                            res.end(fs.readFileSync(faviconPath));
+                            return;
+                        }
+                    }
                     next();
                 },
             });
