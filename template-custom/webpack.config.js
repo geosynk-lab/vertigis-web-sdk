@@ -45,13 +45,16 @@ function setupDualPortBridge(targetPort = 3001, bridgePort = 3000) {
                     rejectUnauthorized: false,
                 },
                 clientRes => {
-                    res.writeHead(clientRes.statusCode || 200, {
-                        ...clientRes.headers,
-                        "Access-Control-Allow-Origin": "*",
-                        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-                        "Access-Control-Allow-Headers": "*",
-                        "Access-Control-Allow-Private-Network": "true",
-                    });
+                    const headers = { ...clientRes.headers };
+                    headers["access-control-allow-origin"] = "*";
+                    headers["access-control-allow-methods"] = "GET, POST, PUT, DELETE, PATCH, OPTIONS";
+                    headers["access-control-allow-headers"] = "*";
+                    headers["access-control-allow-private-network"] = "true";
+                    delete headers["Access-Control-Allow-Origin"];
+                    delete headers["Access-Control-Allow-Methods"];
+                    delete headers["Access-Control-Allow-Headers"];
+                    delete headers["Access-Control-Allow-Private-Network"];
+                    res.writeHead(clientRes.statusCode || 200, headers);
                     clientRes.pipe(res);
                 }
             );
