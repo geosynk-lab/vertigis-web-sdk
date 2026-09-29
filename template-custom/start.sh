@@ -19,5 +19,14 @@ if [ -f "./certs/generate-cert.sh" ]; then
     bash ./certs/generate-cert.sh
 fi
 
+# Check Linux inotify limits to prevent EMFILE watcher crashes with chokidar
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    CURR_INSTANCES=$(sysctl -n fs.inotify.max_user_instances 2>/dev/null || echo 1024)
+    if [ "$CURR_INSTANCES" -lt 512 ]; then
+        echo "[WARN] fs.inotify.max_user_instances is low ($CURR_INSTANCES). You may encounter EMFILE errors."
+        echo "       Recommended fix: sudo sysctl -w fs.inotify.max_user_instances=8192 fs.inotify.max_user_watches=524288"
+    fi
+fi
+
 echo "Starting development server (npm start)..."
 npm start
