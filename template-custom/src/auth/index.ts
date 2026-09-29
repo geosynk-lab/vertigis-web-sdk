@@ -17,6 +17,19 @@ export function initPortalAuth(): void {
     const portalVariants = Array.from(new Set([cleanPortalUrl, cleanPortalUrl.toLowerCase()]));
 
     esriConfig.request.trustedServers = esriConfig.request.trustedServers ?? [];
+
+    // Also trust the portal host origin (ensures feature services at /server receive credentials/tokens)
+    try {
+        const portalOrigin = new URL(cleanPortalUrl).origin;
+        if (!esriConfig.request.trustedServers.includes(portalOrigin)) {
+            esriConfig.request.trustedServers.push(portalOrigin);
+        }
+    } catch {}
+
+    const callbackOrigin = typeof window !== "undefined" && window.location?.origin
+        ? window.location.origin
+        : "https://localtest.me:3001";
+
     for (const url of portalVariants) {
         if (!esriConfig.request.trustedServers.includes(url)) {
             esriConfig.request.trustedServers.push(url);
@@ -25,7 +38,7 @@ export function initPortalAuth(): void {
             appId,
             portalUrl: url,
             popup: true,
-            popupCallbackUrl: "https://localtest.me:3001/oauth_callback.html",
+            popupCallbackUrl: `${callbackOrigin}/oauth_callback.html`,
         });
         esriId.registerOAuthInfos([oauthInfo]);
     }

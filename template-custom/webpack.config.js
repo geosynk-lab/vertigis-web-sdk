@@ -122,12 +122,12 @@ export default merge(defaultWebpackConfig, {
             "Access-Control-Allow-Private-Network": "true",
         },
         client: {
-            webSocketURL: {
-                hostname: isHttp ? "localhost" : "localtest.me",
-                pathname: "/ws",
-                port: 3001,
-                protocol: isHttp ? "ws" : "wss",
+            overlay: {
+                errors: true,
+                warnings: false,
+                runtimeErrors: false,
             },
+            webSocketURL: "auto://0.0.0.0:0/ws",
         },
         setupMiddlewares: (middlewares, devServer) => {
             middlewares.unshift({

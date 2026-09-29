@@ -263,9 +263,12 @@ async function main() {
     console.log("     Ensure Redirect URIs include:");
     console.log("       • https://localtest.me:3001");
     console.log("       • https://localtest.me:3001/oauth_callback.html");
+    console.log("       • https://preview.kw11.org");
+    console.log("       • https://preview.kw11.org/oauth_callback.html");
     console.log("  2. Allowed Origins / CORS (Organization > Settings > Security > Allow Origins):");
     console.log("     If cross-domain requests are restricted, whitelist your development origin:");
     console.log("       • https://localtest.me:3001");
+    console.log("       • https://preview.kw11.org");
     console.log("     (Note: ArcGIS Enterprise requires an FQDN and rejects bare \"localhost\")");
     console.log("\n  Next Steps:");
     console.log("    Run: npm start (or ./start.sh)");
