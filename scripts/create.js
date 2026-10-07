@@ -101,6 +101,8 @@ const customTemplateDir = path.join(rootDir, "template-custom");
 if (fs.existsSync(customTemplateDir)) {
     console.log("[ENTERPRISE] Applying VertiGIS Studio Web SDK Enterprise Template Overlay...");
     fs.cpSync(customTemplateDir, targetPath, { recursive: true, force: true });
+    // The overlay's src/index.ts replaces the base registration, leaving the upstream sample orphaned.
+    fs.rmSync(path.join(targetPath, "src/components/PointsOfInterest"), { recursive: true, force: true });
 
     // Ensure shell scripts are executable on POSIX systems
     if (process.platform !== "win32") {
@@ -160,7 +162,7 @@ if (fs.existsSync(pkgPath)) {
         pkg.name = path.basename(targetPath);
 
         pkg.dependencies = pkg.dependencies || {};
-        pkg.dependencies["@mui/material"] = "^5.15.0";
+        pkg.dependencies["@mui/material"] = "^7.3.0";
         pkg.dependencies["@emotion/react"] = "^11.11.0";
         pkg.dependencies["@emotion/styled"] = "^11.11.0";
 
@@ -170,6 +172,7 @@ if (fs.existsSync(pkgPath)) {
 
         pkg.scripts = pkg.scripts || {};
         pkg.scripts["cert:gen"] = "bash ./certs/generate-cert.sh";
+        pkg.scripts["verify:styles"] = "python3 scripts/verify_zero_cosmetic_sx.py";
         pkg.scripts["auth:portal"] = "node ./scripts/configure-portal.js";
         pkg.scripts["skill:add"] =
             "npx --yes skills add geosynk-lab/vertigis-sdk-skills --skill vertigis-web-sdk-skill -y";
