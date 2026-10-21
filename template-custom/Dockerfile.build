@@ -1,0 +1,43 @@
+# syntax=docker/dockerfile:1.4
+# Multi-stage Dockerfile for building VertiGIS Studio Web SDK extensions in clean CI/CD environments.
+#
+# Build and extract compiled bundle directly to host filesystem:
+#   docker build -f Dockerfile.build --target exporter --output build/ .
+# Or build standard container image:
+#   docker build -f Dockerfile.build -t vertigis-extension:prod .
+
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Enable corepack for pnpm support
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Layer 1: Cached dependencies
+COPY package.json pnpm-lock.yaml* package-lock.json* ./
+RUN if [ -f pnpm-lock.yaml ]; then \
+        pnpm install --frozen-lockfile; \
+    elif [ -f package-lock.json ]; then \
+        npm ci; \
+    else \
+        npm install; \
+    fi
+
+# Layer 2: Source compilation
+COPY . .
+ENV NODE_ENV=production
+RUN if [ -f pnpm-lock.yaml ]; then \
+        pnpm run build; \
+    else \
+        npm run build; \
+    fi
+
+# Layer 3: Sanity audit (verify zero dev OAuth URLs leaked into production bundle)
+RUN if grep -Fq "localtest.me" build/main.js; then \
+        echo "FATAL: localtest.me detected in build/main.js! Dev OAuth hijacked production bundle." >&2; \
+        exit 1; \
+    fi
+
+# Layer 4: Minimal scratch exporter (extracts build/ directory via BuildKit)
+FROM scratch AS exporter
+COPY --from=builder /app/build/ /

@@ -162,7 +162,7 @@ if (fs.existsSync(pkgPath)) {
         pkg.name = path.basename(targetPath);
 
         pkg.dependencies = pkg.dependencies || {};
-        pkg.dependencies["@mui/material"] = "^7.3.0";
+        pkg.dependencies["@mui/material"] = "^5.15.0";
         pkg.dependencies["@emotion/react"] = "^11.11.0";
         pkg.dependencies["@emotion/styled"] = "^11.11.0";
 

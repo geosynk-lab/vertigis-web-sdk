@@ -3,7 +3,10 @@ import CustomWidget, { CustomWidgetModel } from "./components/CustomWidget";
 import { initPortalAuth } from "./auth";
 
 // Automatically initialize ArcGIS Enterprise Portal OAuth if configured via `npm run auth:portal`
-initPortalAuth();
+// Guarded for development only: guest extension libraries must never register OAuth callbacks in production
+if (process.env.NODE_ENV !== "production") {
+    initPortalAuth();
+}
 
 const LAYOUT_NAMESPACE = "custom.foo";
 

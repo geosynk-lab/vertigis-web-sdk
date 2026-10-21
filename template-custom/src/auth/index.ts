@@ -8,6 +8,10 @@ import portalConfig from "./portalConfig.json";
  * if a portal is configured. If disabled, maintains default standard unauthenticated behavior.
  */
 export function initPortalAuth(): void {
+    if (process.env.NODE_ENV === "production") {
+        return;
+    }
+
     if (!portalConfig || !portalConfig.enabled || !portalConfig.portal || !portalConfig.appId) {
         return;
     }
@@ -28,7 +32,7 @@ export function initPortalAuth(): void {
 
     const callbackOrigin = typeof window !== "undefined" && window.location?.origin
         ? window.location.origin
-        : "https://localtest.me:3001";
+        : "https://localhost:3001";
 
     for (const url of portalVariants) {
         if (!esriConfig.request.trustedServers.includes(url)) {
