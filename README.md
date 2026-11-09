@@ -142,6 +142,7 @@ my-web-library/
 ## Available Scripts (in Scaffolded Project)
 
 - **`./start.sh` (or `start.bat`)**: Kills stale port 3000 processes, generates SSL certificates if missing, and runs `npm start`.
+- **`./start.sh remote [branch] [seconds]`** (or `start.bat remote [branch]`, or `npm run start:remote`): Pulls `origin/<branch>` first, then fetches it again each 5 seconds (default) while the dev server runs. Fast-forward only: local commits and uncommitted changes are never overwritten. When `package.json` or a lockfile changes, it tells you to run `npm install`.
 - **`npm start`**: Runs the project in development mode with hot reloading.
 - **`npm run auth:portal`**: Interactive wizard to configure ArcGIS Enterprise Portal / AGOL OAuth authentication and secured web maps.
 - **`npm run build`** (or `./build.sh`): Generates an optimized production bundle in `dist/`.
