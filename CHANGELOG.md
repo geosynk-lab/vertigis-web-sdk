@@ -23,6 +23,8 @@
 -   Remove `UI_TOKENS.accent.contrastText` from new projects. No host token is paired with `--primaryAccent`, so text on
     an accent fill can be unreadable in brand themes (for example black on black). For a selected state, use
     `UI_TOKENS.control.itemSelected` with the inherited text and an accent border.
+-   Add three rules to the `AGENTS.md` of new projects: no text on a `--primaryAccent` fill, dev OAuth isolation in
+    production builds, and host command interception with `{ targetInactive: true }` and `context.next(args)`.
 
 ### Fixed
 
