@@ -125,6 +125,7 @@ my-web-library/
 │   ├── components/
 │   │   └── CustomWidget/     ← Decomposed component template
 │   │       ├── CustomWidget.tsx
+│   │       ├── CustomWidget.css  ← Co-located styles (validator rule COMPONENT_CSS_PAIR)
 │   │       ├── CustomWidgetModel.ts
 │   │       ├── index.ts
 │   │       └── components/   ← Presentational subcomponents & ErrorBoundary

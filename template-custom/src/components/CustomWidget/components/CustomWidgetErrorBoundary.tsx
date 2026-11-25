@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Alert, AlertTitle, Button } from "@mui/material";
+import "./CustomWidgetErrorBoundary.css";
 
 interface Props {
     children: React.ReactNode;

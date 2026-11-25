@@ -6,6 +6,7 @@ import { useWatchAndRerender } from "@vertigis/web/ui";
 import { VertiGisThemeProvider } from "../../tokens/VertiGisThemeProvider";
 import type { CustomWidgetModel } from "./CustomWidgetModel";
 import { CustomWidgetErrorBoundary } from "./components/CustomWidgetErrorBoundary";
+import "./CustomWidget.css";
 
 export interface CustomWidgetProps extends LayoutElementProperties<CustomWidgetModel> {}
 
