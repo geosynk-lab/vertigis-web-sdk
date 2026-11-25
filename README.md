@@ -46,8 +46,9 @@ Every project scaffolded from this repository includes:
    - Automatically executed on project creation or during first startup.
 
 5. **Cross-Platform Startup & Build Scripts**:
-   - `start.sh` / `start.bat`: Checks and kills stale port 3000 processes, verifies SSL certificates, and launches the development server.
-   - `build.sh` / `build.bat`: Compiles and validates production bundles into `build/`. `upload-gc <public-url>` also uploads the bundle to Google Cloud Storage.
+   - `start.sh` / `start.bat`: Checks and kills stale processes on ports 3001 and 3000, verifies SSL certificates, and launches the development server. `remote` mode keeps the checkout in sync with `origin/<branch>` while the server runs.
+   - `build.sh` / `build.bat`: Compiles and validates production bundles into `build/`. `upload-gc [public-url]` also uploads the bundle to Google Cloud Storage.
+   - `project.config`: One commented file for all script values (build name, upload URL, remote sync, portal authentication). See [Project Configuration](#project-configuration-projectconfig).
 
 6. **Coding Assistant Governance (`AGENTS.md`)**:
    - Pre-injected VertiGIS Web SDK directives ensuring AI coding assistants (such as Antigravity, Claude Code, Cursor, Copilot) strictly follow typography rules, token usage, and file size limits.
@@ -130,9 +131,15 @@ my-web-library/
 │   └── utils/
 │       ├── themeDetection.ts ← Standalone luminance-based theme detector
 │       └── index.ts
+├── scripts/
+│   ├── load-config.sh / .bat ← Reads project.config for the .sh and .bat scripts
+│   ├── remote-sync.sh / .bat ← Fast-forward sync with origin (start.sh remote)
+│   ├── configure-portal.js   ← Portal OAuth configurator (npm run auth:portal)
+│   └── verify_zero_cosmetic_sx.py ← Style audit (npm run verify:styles)
 ├── AGENTS.md                 ← AI assistant development directives
-├── start.sh / start.bat      ← Port killer + SSL check + dev server runner
-├── build.sh / build.bat      ← Production compilation script
+├── project.config            ← Values for the scripts (build, upload, remote sync, portal auth)
+├── start.sh / start.bat      ← Port killer + SSL check + dev server runner (+ remote mode)
+├── build.sh / build.bat      ← Production compilation script (+ upload-gc)
 ├── package.json              ← Includes @mui/material, @emotion/react, and @emotion/styled
 └── webpack.config.js
 ```
@@ -141,14 +148,51 @@ my-web-library/
 
 ## Available Scripts (in Scaffolded Project)
 
-- **`./start.sh` (or `start.bat`)**: Kills stale port 3000 processes, generates SSL certificates if missing, and runs `npm start`.
-- **`./start.sh remote [branch] [seconds]`** (or `start.bat remote [branch]`, or `npm run start:remote`): Pulls `origin/<branch>` first, then fetches it again each 5 seconds (default) while the dev server runs. Fast-forward only: local commits and uncommitted changes are never overwritten. When `package.json` or a lockfile changes, it tells you to run `npm install`.
+- **`./start.sh` (or `start.bat`)**: Kills stale processes on ports 3001 and 3000, generates SSL certificates if missing, and runs `npm start`.
+- **`./start.sh remote [branch] [seconds]`** (or `start.bat remote [branch]`, or `npm run start:remote`): Pulls `origin/<branch>` first, then fetches it again each 5 seconds (default, `REMOTE_INTERVAL`) while the dev server runs. Fast-forward only: local commits and uncommitted changes are never overwritten. When `package.json` or a lockfile changes, it tells you to run `npm install`.
 - **`npm start`**: Runs the project in development mode with hot reloading.
-- **`npm run auth:portal`**: Interactive wizard to configure ArcGIS Enterprise Portal / AGOL OAuth authentication and secured web maps.
+- **`npm run auth:portal`**: Interactive wizard to configure ArcGIS Enterprise Portal / AGOL OAuth authentication and secured web maps. If `PORTAL_URL` and `PORTAL_CLIENT_ID` are set in `project.config`, it runs without questions.
 - **`npm run build`** (or `./build.sh [name]`): Generates an optimized production bundle in `build/`.
-- **`project.config`**: One file for the values that the scripts use: the build name (`BUILD_NAME`), the Google Cloud Storage upload (`GC_UPLOAD_URL`, `GC_CACHE_CONTROL`), remote sync (`REMOTE_SYNC`, `REMOTE_BRANCH`, `REMOTE_INTERVAL`), and portal authentication (`PORTAL_URL`, `PORTAL_CLIENT_ID`, `PORTAL_ACCOUNT_ID`, `PORTAL_WEBMAP`, `PORTAL_PREVIEW_ORIGINS`). Each value has a comment in the file. A command-line argument overrides the value in the file. The file is committed to git, so do not put passwords or tokens in it.
 - **`./build.sh upload-gc [public-url] [name]`** (or `build.bat upload-gc [public-url] [name]`): Builds, then uploads `build/<name>.js` to Google Cloud Storage with `gcloud`. If you do not give the URL, the script uses `GC_UPLOAD_URL` from `project.config`. The URL is `https://storage.googleapis.com/<bucket>/<path>` or `gs://<bucket>/<path>`. If it ends with `.js`, it is the file name. Otherwise it is a folder. The bucket must already allow public read.
 - **`npm run cert:gen`**: Regenerates development SSL certificates in `certs/`.
+
+---
+
+## Project Configuration (`project.config`)
+
+Each scaffolded project has a `project.config` file in its root. It contains all the values that the scripts use, with a comment for each value. Change the values in this file, so that you do not have to type them on the command line each time.
+
+| Key | Used by | Description | Default |
+| :--- | :--- | :--- | :--- |
+| `BUILD_NAME` | `build.sh` / `build.bat` | Name of the built library: `build/<BUILD_NAME>.js` and `.js.txt` | Project folder name |
+| `GC_UPLOAD_URL` | `build.sh upload-gc` | Upload target: `https://storage.googleapis.com/<bucket>/<path>` or `gs://<bucket>/<path>`. A value that ends with `.js` is the file name. Other values are a folder. | Not set |
+| `GC_CACHE_CONTROL` | `build.sh upload-gc` | `Cache-Control` header of the uploaded file | `no-cache` |
+| `REMOTE_SYNC` | `start.sh` / `start.bat` | `true` = use remote mode also without the `remote` argument | `false` |
+| `REMOTE_BRANCH` | `start.sh remote` | Branch to sync with | Current branch |
+| `REMOTE_INTERVAL` | `start.sh remote` | Seconds between two fetches | `5` |
+| `PORTAL_URL` | `npm run auth:portal` | ArcGIS Enterprise portal or ArcGIS Online URL | Not set |
+| `PORTAL_CLIENT_ID` | `npm run auth:portal` | OAuth application Client ID | Not set |
+| `PORTAL_ACCOUNT_ID` | `npm run auth:portal` | Account ID (organization identifier) | `enterprise` |
+| `PORTAL_WEBMAP` | `npm run auth:portal` | Web map item ID or URL to set in `app/app.json` | Not set (no change) |
+| `PORTAL_PREVIEW_ORIGINS` | `npm run auth:portal` | More preview origins to register in the portal, separated by commas | `https://preview.kw11.org` |
+
+Rules:
+- One `KEY=VALUE` on each line. Do not put spaces around `=`, quotes around a value, or a comment after a value. Do not use `!` in a value (Windows `.bat` scripts remove it).
+- Lines that start with `#` are comments. An empty value (`KEY=`) means "not set", so the script uses its default.
+- Priority: a command-line argument, then `project.config`, then the default in the script.
+- The scripts only read `KEY=VALUE` lines. They do not run the file as code.
+- The file is committed to git and shared with your team. Do not put passwords or tokens in it.
+
+Example:
+```ini
+BUILD_NAME=my-library
+GC_UPLOAD_URL=https://storage.googleapis.com/my-bucket/libs/
+REMOTE_SYNC=true
+REMOTE_BRANCH=main
+PORTAL_URL=https://gis.example.com/portal
+PORTAL_CLIENT_ID=myClientId123
+```
+With these values, `./build.sh upload-gc` builds and uploads `my-library.js`, `./start.sh` starts in remote mode on `main`, and `npm run auth:portal` configures the portal without questions.
 
 ---
 
@@ -238,7 +282,9 @@ If your ArcGIS Enterprise Portal restricts cross-domain requests, you must white
 > **Note**: ArcGIS Enterprise requires a fully qualified domain name (FQDN) containing a domain suffix (e.g., `localtest.me:3001`). Bare hostnames like `localhost` and wildcard `*` machine names are rejected by Portal security. In production, VertiGIS Studio Web is deployed directly within your GIS environment, so only the development origin needs whitelisting.
 
 #### Step 2: Run the Automated Portal Configurator
-Run the interactive configurator in your project:
+Option 1: set `PORTAL_URL`, `PORTAL_CLIENT_ID`, and optionally `PORTAL_ACCOUNT_ID` and `PORTAL_WEBMAP` in `project.config` (see [Project Configuration](#project-configuration-projectconfig)). Then `npm run auth:portal` runs without questions.
+
+Option 2: run the interactive configurator in your project:
 ```bash
 npm run auth:portal
 ```
