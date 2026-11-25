@@ -7,9 +7,16 @@
 -   Add `./start.sh remote` (`start.bat remote` on Windows) and `npm run start:remote` to new projects. This mode pulls
     the branch from `origin`, then fetches it again each 5 seconds while the server runs. It fast-forwards only. It does
     not change local commits or uncommitted changes.
--   Add `./build.sh upload-gc <public-url> [name]` (`build.bat upload-gc <public-url> [name]` on Windows) to new
+-   Add `./build.sh upload-gc [public-url] [name]` (`build.bat upload-gc [public-url] [name]` on Windows) to new
     projects. This command builds the project, then uploads `build/<name>.js` to Google Cloud Storage with `gcloud`. Then
     it shows the public URL of the library.
+-   Add `project.config` to new projects. This file contains the values that `build.sh`, `start.sh`, and
+    `npm run auth:portal` use, with a comment for each value. Examples: the build name, the upload URL, the remote
+    branch, and the portal URL and client ID. A command-line argument overrides the value in the file.
+
+### Fixed
+
+-   Fix `start.bat remote`, which did not stop the sync window when the dev server stopped
 
 ## [3.1.1] - 2026-10-15
 

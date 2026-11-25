@@ -3,28 +3,43 @@ set -euo pipefail
 
 # Usage: ./build.sh [name]
 #            Build build/<name>.js and build/<name>.js.txt.
-#        ./build.sh upload-gc <public-url> [name]
+#        ./build.sh upload-gc [public-url] [name]
 #            Build, then upload build/<name>.js to Google Cloud Storage with gcloud.
+#
+# Values that you do not give on the command line come from project.config:
+#   BUILD_NAME, GC_UPLOAD_URL, GC_CACHE_CONTROL. See project.config for the description of each value.
 #
 # <public-url> is https://storage.googleapis.com/<bucket>/<path> or gs://<bucket>/<path>.
 # If the URL ends with ".js", it is the object name. Otherwise it is a folder and the file is <name>.js in it.
 # The bucket must already allow public read (allUsers: Storage Object Viewer). This script does not change access.
 
+cd "$(dirname "${BASH_SOURCE[0]}")"
+# shellcheck source=scripts/load-config.sh
+source ./scripts/load-config.sh
+
+UPLOAD=""
 UPLOAD_URL=""
 if [ "${1:-}" = "upload-gc" ]; then
-    UPLOAD_URL="${2:-}"
+    UPLOAD=1
+    shift
+    if [ $# -gt 0 ]; then
+        UPLOAD_URL="$1"
+        shift
+    fi
+    UPLOAD_URL="${UPLOAD_URL:-${CFG_GC_UPLOAD_URL:-}}"
     if [ -z "$UPLOAD_URL" ]; then
         echo "Usage: ./build.sh upload-gc <public-url> [name]" >&2
+        echo "       Or set GC_UPLOAD_URL in project.config and run: ./build.sh upload-gc" >&2
         exit 1
     fi
-    shift 2
 fi
 
-NAME="${1:-__PROJECT_NAME__}"
+NAME="${1:-${CFG_BUILD_NAME:-__PROJECT_NAME__}}"
+CACHE_CONTROL="${CFG_GC_CACHE_CONTROL:-no-cache}"
 
 # Check the upload settings before the build, so that a bad URL fails fast.
 GS_OBJECT=""
-if [ -n "$UPLOAD_URL" ]; then
+if [ -n "$UPLOAD" ]; then
     case "$UPLOAD_URL" in
         gs://*) GS_PATH="${UPLOAD_URL#gs://}" ;;
         https://storage.googleapis.com/*) GS_PATH="${UPLOAD_URL#https://storage.googleapis.com/}" ;;
@@ -65,11 +80,10 @@ cp -f "build/main.js" "build/${NAME}.js.txt"
 echo "Created build/${NAME}.js and build/${NAME}.js.txt (verified zero dev URLs)"
 
 if [ -n "$GS_OBJECT" ]; then
-    echo "Uploading build/${NAME}.js to gs://${GS_OBJECT}..."
-    # no-cache: VertiGIS Studio Web loads the new version at the next app load.
+    echo "Uploading build/${NAME}.js to gs://${GS_OBJECT} (Cache-Control: ${CACHE_CONTROL})..."
     gcloud storage cp "build/${NAME}.js" "gs://${GS_OBJECT}" \
         --content-type="application/javascript" \
-        --cache-control="no-cache"
+        --cache-control="${CACHE_CONTROL}"
     echo "Uploaded. Public URL (add it in Designer > App Settings > Custom Libraries):"
     echo "  https://storage.googleapis.com/${GS_OBJECT}"
 fi

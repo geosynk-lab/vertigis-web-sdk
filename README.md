@@ -146,7 +146,8 @@ my-web-library/
 - **`npm start`**: Runs the project in development mode with hot reloading.
 - **`npm run auth:portal`**: Interactive wizard to configure ArcGIS Enterprise Portal / AGOL OAuth authentication and secured web maps.
 - **`npm run build`** (or `./build.sh [name]`): Generates an optimized production bundle in `build/`.
-- **`./build.sh upload-gc <public-url> [name]`** (or `build.bat upload-gc <public-url> [name]`): Builds, then uploads `build/<name>.js` to Google Cloud Storage with `gcloud`. The URL is `https://storage.googleapis.com/<bucket>/<path>` or `gs://<bucket>/<path>`. If it ends with `.js`, it is the file name. Otherwise it is a folder. The bucket must already allow public read.
+- **`project.config`**: One file for the values that the scripts use: the build name (`BUILD_NAME`), the Google Cloud Storage upload (`GC_UPLOAD_URL`, `GC_CACHE_CONTROL`), remote sync (`REMOTE_SYNC`, `REMOTE_BRANCH`, `REMOTE_INTERVAL`), and portal authentication (`PORTAL_URL`, `PORTAL_CLIENT_ID`, `PORTAL_ACCOUNT_ID`, `PORTAL_WEBMAP`, `PORTAL_PREVIEW_ORIGINS`). Each value has a comment in the file. A command-line argument overrides the value in the file. The file is committed to git, so do not put passwords or tokens in it.
+- **`./build.sh upload-gc [public-url] [name]`** (or `build.bat upload-gc [public-url] [name]`): Builds, then uploads `build/<name>.js` to Google Cloud Storage with `gcloud`. If you do not give the URL, the script uses `GC_UPLOAD_URL` from `project.config`. The URL is `https://storage.googleapis.com/<bucket>/<path>` or `gs://<bucket>/<path>`. If it ends with `.js`, it is the file name. Otherwise it is a folder. The bucket must already allow public read.
 - **`npm run cert:gen`**: Regenerates development SSL certificates in `certs/`.
 
 ---
@@ -200,6 +201,9 @@ Build and upload to a public Google Cloud Storage bucket (needs the [Google Clou
 ./build.sh upload-gc https://storage.googleapis.com/my-bucket/libs/
 # Uploads build/<project-name>.js to gs://my-bucket/libs/<project-name>.js with Cache-Control: no-cache,
 # then prints the public URL to add in Designer > App Settings > Custom Libraries.
+
+# Or set GC_UPLOAD_URL=https://storage.googleapis.com/my-bucket/libs/ in project.config, then:
+./build.sh upload-gc
 ```
 
 ---

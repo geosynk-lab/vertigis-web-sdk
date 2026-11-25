@@ -124,9 +124,13 @@ if (fs.existsSync(customTemplateDir)) {
         }
     }
 
-    // Configure build scripts with user-selected project name
+    // Configure build scripts and project.config with user-selected project name
     const projectName = path.basename(targetPath);
-    const buildScripts = [path.join(targetPath, "build.sh"), path.join(targetPath, "build.bat")];
+    const buildScripts = [
+        path.join(targetPath, "build.sh"),
+        path.join(targetPath, "build.bat"),
+        path.join(targetPath, "project.config"),
+    ];
     for (const bs of buildScripts) {
         if (fs.existsSync(bs)) {
             try {
@@ -317,6 +321,7 @@ console.log("  - Anti-God Component:        src/components/CustomWidget/ (ErrorB
 console.log("  - Portal Auth Config:        npm run auth:portal (Enterprise Portal / AGOL OAuth)");
 console.log("  - AI Assistant Skill:        npm run skill:add (install/update from vertigis-sdk-skills)");
 console.log("  - Development Scripts:       start.sh / start.bat, build.sh / build.bat");
+console.log("  - Script Configuration:      project.config (build name, upload URL, remote sync, portal auth)");
 console.log("  - AI Directives:             AGENTS.md pre-configured for coding assistants");
 if (packageManager === "none") {
     console.log("  - Monorepo Mode:             Run 'npm install' or 'pnpm install' at workspace root");

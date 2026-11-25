@@ -4,11 +4,19 @@ set -euo pipefail
 # Usage: ./start.sh            normal dev server
 #        ./start.sh remote     pull first, then re-check the remote every 5s while the server runs
 #        ./start.sh remote <branch> [seconds]
+#
+# Values that you do not give on the command line come from project.config:
+#   REMOTE_SYNC, REMOTE_BRANCH, REMOTE_INTERVAL. See project.config for the description of each value.
+cd "$(dirname "${BASH_SOURCE[0]}")"
+# shellcheck source=scripts/load-config.sh
+source ./scripts/load-config.sh
+
 REMOTE_MODE=""
-if [ "${1:-}" = "remote" ]; then
+if [ "${1:-}" = "remote" ] || [ "${CFG_REMOTE_SYNC:-false}" = "true" ]; then
     REMOTE_MODE=1
-    SYNC_BRANCH="${2:-$(git rev-parse --abbrev-ref HEAD)}"
-    SYNC_INTERVAL="${3:-5}"
+    [ "${1:-}" = "remote" ] && shift
+    SYNC_BRANCH="${1:-${CFG_REMOTE_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}}"
+    SYNC_INTERVAL="${2:-${CFG_REMOTE_INTERVAL:-5}}"
 fi
 
 echo "========================================================"

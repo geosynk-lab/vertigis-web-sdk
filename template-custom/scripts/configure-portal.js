@@ -14,6 +14,34 @@ const oauthCallbackPath = path.join(projRoot, "app/oauth_callback.html");
 
 const args = process.argv.slice(2);
 
+/**
+ * Reads project.config from the project root.
+ * Each KEY=VALUE line becomes one entry. Lines that start with "#" and empty lines are ignored.
+ * An empty value means "not set".
+ * See project.config for the description of each PORTAL_* value.
+ * @returns {Record<string, string>}
+ */
+function readProjectConfig() {
+    /** @type {Record<string, string>} */
+    const values = {};
+    for (const name of ["project.config"]) {
+        const file = path.join(projRoot, name);
+        if (!fs.existsSync(file)) {
+            continue;
+        }
+        for (const line of fs.readFileSync(file, "utf-8").split(/\r?\n/)) {
+            const idx = line.indexOf("=");
+            if (!line || line.startsWith("#") || idx <= 0) {
+                continue;
+            }
+            values[line.slice(0, idx)] = line.slice(idx + 1);
+        }
+    }
+    return values;
+}
+
+const projectConfig = readProjectConfig();
+
 function printHelp() {
     console.log(`
 ================================================================================
@@ -23,6 +51,10 @@ function printHelp() {
 Usage:
   npm run auth:portal
   npm run auth:portal -- [options]
+
+Values that you do not give as options come from project.config:
+  PORTAL_URL, PORTAL_CLIENT_ID, PORTAL_ACCOUNT_ID, PORTAL_WEBMAP, PORTAL_PREVIEW_ORIGINS.
+  If PORTAL_URL and PORTAL_CLIENT_ID both have a value, the script does not ask questions.
 
 Options:
   --portal <url>        [Required] ArcGIS Enterprise Portal or AGOL URL (e.g. https://gis.{org}.com/portal)
@@ -106,10 +138,16 @@ async function main() {
         process.exit(0);
     }
 
-    let portalUrl = getArgValue("--portal");
-    let appId = getArgValue("--client-id") || getArgValue("--clientId") || getArgValue("--app-id");
-    let accountId = getArgValue("--account-id");
-    let webMap = getArgValue("--webmap") || getArgValue("--webMap");
+    // Priority: command-line option, then project.config.
+    let portalUrl = getArgValue("--portal") || projectConfig.PORTAL_URL || null;
+    let appId =
+        getArgValue("--client-id") ||
+        getArgValue("--clientId") ||
+        getArgValue("--app-id") ||
+        projectConfig.PORTAL_CLIENT_ID ||
+        null;
+    let accountId = getArgValue("--account-id") || projectConfig.PORTAL_ACCOUNT_ID || null;
+    let webMap = getArgValue("--webmap") || getArgValue("--webMap") || projectConfig.PORTAL_WEBMAP || null;
 
     // Load existing values as defaults if available
     let existingConfig = {};
@@ -258,17 +296,25 @@ async function main() {
     if (webMap) {
         console.log(`  - Web Map:    ${webMap}`);
     }
+    // Origins to register in the portal. Projects without PORTAL_PREVIEW_ORIGINS keep the earlier default.
+    const previewOrigins = (projectConfig.PORTAL_PREVIEW_ORIGINS ?? "https://preview.kw11.org")
+        .split(",")
+        .map(origin => origin.trim().replace(/\/+$/, ""))
+        .filter(Boolean);
+    const origins = ["https://localtest.me:3001", ...previewOrigins];
+
     console.log("\n  IMPORTANT PREREQUISITES in your Portal Configuration:");
     console.log("  1. OAuth App Registration (Content > Add Item > Application):");
     console.log("     Ensure Redirect URIs include:");
-    console.log("       • https://localtest.me:3001");
-    console.log("       • https://localtest.me:3001/oauth_callback.html");
-    console.log("       • https://preview.kw11.org");
-    console.log("       • https://preview.kw11.org/oauth_callback.html");
+    for (const origin of origins) {
+        console.log(`       • ${origin}`);
+        console.log(`       • ${origin}/oauth_callback.html`);
+    }
     console.log("  2. Allowed Origins / CORS (Organization > Settings > Security > Allow Origins):");
     console.log("     If cross-domain requests are restricted, whitelist your development origin:");
-    console.log("       • https://localtest.me:3001");
-    console.log("       • https://preview.kw11.org");
+    for (const origin of origins) {
+        console.log(`       • ${origin}`);
+    }
     console.log("     (Note: ArcGIS Enterprise requires an FQDN and rejects bare \"localhost\")");
     console.log("\n  Next Steps:");
     console.log("    Run: npm start (or ./start.sh)");
