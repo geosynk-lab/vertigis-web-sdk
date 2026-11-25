@@ -201,6 +201,1198 @@
     },
     {
       "id": "branding",
+      "themes": [
+        {
+          "id": "light",
+          "accentColor": [
+            255,
+            199,
+            9,
+            255
+          ],
+          "colors": {
+            "accentIconBackground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "accentIconBackgroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "accentIconBorder": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "accentIconBorderHover": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "accentIconForeground": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "accentIconForegroundHover": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "alertAmberBackground": [
+              191,
+              83,
+              0,
+              255
+            ],
+            "alertAmberBackgroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertAmberBorder": [
+              191,
+              83,
+              0,
+              255
+            ],
+            "alertAmberBorderHover": [
+              191,
+              83,
+              0,
+              255
+            ],
+            "alertAmberForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertAmberForegroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertAmberIcon": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertAmberIconHover": [
+              191,
+              83,
+              0,
+              255
+            ],
+            "alertGrayBackground": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertGrayBackgroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGrayBorder": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertGrayBorderHover": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertGrayForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGrayForegroundHover": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertGrayIcon": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGrayIconHover": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertGreenBackground": [
+              0,
+              128,
+              64,
+              255
+            ],
+            "alertGreenBackgroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGreenBorder": [
+              0,
+              128,
+              64,
+              255
+            ],
+            "alertGreenBorderHover": [
+              0,
+              128,
+              64,
+              255
+            ],
+            "alertGreenForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGreenForegroundHover": [
+              0,
+              128,
+              64,
+              255
+            ],
+            "alertGreenIcon": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGreenIconHover": [
+              0,
+              128,
+              64,
+              255
+            ],
+            "alertRedBackground": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "alertRedBackgroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertRedBorder": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "alertRedBorderHover": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "alertRedForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertRedForegroundHover": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "alertRedIcon": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertRedIconHover": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "alertBackgroundDisabled": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertBorderDisabled": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertForegroundDisabled": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "alertIconDisabled": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "buttonBackground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "buttonBackgroundDisabled": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "buttonBackgroundHover": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "buttonBorder": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "buttonBorderDisabled": [
+              64,
+              64,
+              64,
+              255
+            ],
+            "buttonBorderHover": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "buttonForeground": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "buttonForegroundDisabled": [
+              64,
+              64,
+              64,
+              255
+            ],
+            "buttonForegroundHover": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "buttonIcon": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "buttonIconDisabled": [
+              87,
+              87,
+              87,
+              255
+            ],
+            "buttonIconHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "defaultMapBackground": [
+              235,
+              235,
+              235,
+              255
+            ],
+            "disabledIconFill": [
+              50,
+              50,
+              50,
+              255
+            ],
+            "emphasizedButtonBackground": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "emphasizedButtonBackgroundDisabled": [
+              128,
+              128,
+              128,
+              255
+            ],
+            "emphasizedButtonBackgroundHover": [
+              255,
+              114,
+              27,
+              255
+            ],
+            "emphasizedButtonBorder": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "emphasizedButtonBorderDisabled": [
+              64,
+              64,
+              64,
+              255
+            ],
+            "emphasizedButtonBorderHover": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "emphasizedButtonForeground": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "emphasizedButtonForegroundDisabled": [
+              64,
+              64,
+              64,
+              255
+            ],
+            "emphasizedButtonForegroundHover": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "emphasizedButtonIcon": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "emphasizedButtonIconDisabled": [
+              48,
+              0,
+              114,
+              255
+            ],
+            "emphasizedButtonIconHover": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "errorHelperTextBackground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "errorHelperTextForeground": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "errorIconBackground": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "errorIconForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "inlineTableHeaderBackground": [
+              198,
+              198,
+              198,
+              255
+            ],
+            "inlineTableRowBackground": [
+              235,
+              235,
+              235,
+              255
+            ],
+            "inlineTableBorder": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "inputBorder": [
+              87,
+              87,
+              87,
+              255
+            ],
+            "inputBorderDisabled": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "itemSelectedBackground": [
+              231,
+              220,
+              245,
+              255
+            ],
+            "itemHoverBackground": [
+              152,
+              112,
+              208,
+              255
+            ],
+            "loadingBarBackground": [
+              255,
+              239,
+              186,
+              255
+            ],
+            "none": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "panelBorder": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "primaryAccent": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "primaryAccentDisabled": [
+              124,
+              124,
+              124,
+              255
+            ],
+            "primaryAccentHover": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "primaryAccentLarge": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "primaryBackground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "primaryBackgroundDisabled": [
+              235,
+              235,
+              235,
+              255
+            ],
+            "primaryBorder": [
+              198,
+              198,
+              198,
+              255
+            ],
+            "primaryForeground": [
+              50,
+              50,
+              50,
+              255
+            ],
+            "primaryForegroundDisabled": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "secondaryBackground": [
+              235,
+              235,
+              235,
+              255
+            ],
+            "secondaryBorder": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "secondaryForeground": [
+              87,
+              87,
+              87,
+              255
+            ],
+            "splashScreenForeground": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "tabPrimaryForeground": [
+              25,
+              25,
+              25,
+              255
+            ],
+            "tabSecondaryForeground": [
+              255,
+              199,
+              9,
+              255
+            ]
+          },
+          "template": "light",
+          "title": "language-common-theme-light"
+        },
+        {
+          "id": "dark",
+          "accentColor": [
+            255,
+            199,
+            9,
+            255
+          ],
+          "colors": {
+            "accentIconBackground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "accentIconBackgroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "accentIconBorder": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "accentIconBorderHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "accentIconForeground": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "accentIconForegroundHover": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "alertAmberBackground": [
+              191,
+              83,
+              0,
+              255
+            ],
+            "alertAmberBackgroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertAmberBorder": [
+              191,
+              83,
+              0,
+              255
+            ],
+            "alertAmberBorderHover": [
+              191,
+              83,
+              0,
+              255
+            ],
+            "alertAmberForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertAmberForegroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertAmberIcon": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertAmberIconHover": [
+              191,
+              83,
+              0,
+              255
+            ],
+            "alertGrayBackground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGrayBackgroundHover": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertGrayBorder": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertGrayBorderHover": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertGrayForeground": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertGrayForegroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGrayIcon": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertGrayIconHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGreenBackground": [
+              0,
+              128,
+              64,
+              255
+            ],
+            "alertGreenBackgroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGreenBorder": [
+              0,
+              128,
+              64,
+              255
+            ],
+            "alertGreenBorderHover": [
+              0,
+              128,
+              64,
+              255
+            ],
+            "alertGreenForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGreenForegroundHover": [
+              0,
+              128,
+              64,
+              255
+            ],
+            "alertGreenIcon": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertGreenIconHover": [
+              0,
+              128,
+              64,
+              255
+            ],
+            "alertRedBackground": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "alertRedBackgroundHover": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertRedBorder": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "alertRedBorderHover": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "alertRedForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertRedForegroundHover": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "alertRedIcon": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "alertRedIconHover": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "alertBackgroundDisabled": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertBorderDisabled": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "alertForegroundDisabled": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "alertIconDisabled": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "buttonBackground": [
+              223,
+              198,
+              139,
+              255
+            ],
+            "buttonBackgroundDisabled": [
+              64,
+              64,
+              64,
+              255
+            ],
+            "buttonBackgroundHover": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "buttonBorder": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "buttonBorderDisabled": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "buttonBorderHover": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "buttonForeground": [
+              44,
+              44,
+              44,
+              255
+            ],
+            "buttonForegroundDisabled": [
+              128,
+              128,
+              128,
+              255
+            ],
+            "buttonForegroundHover": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "buttonIcon": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "buttonIconDisabled": [
+              64,
+              64,
+              64,
+              255
+            ],
+            "buttonIconHover": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "defaultMapBackground": [
+              87,
+              87,
+              87,
+              255
+            ],
+            "disabledIconFill": [
+              50,
+              50,
+              50,
+              255
+            ],
+            "emphasizedButtonBackground": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "emphasizedButtonBackgroundDisabled": [
+              128,
+              128,
+              128,
+              255
+            ],
+            "emphasizedButtonBackgroundHover": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "emphasizedButtonBorder": [
+              64,
+              64,
+              64,
+              255
+            ],
+            "emphasizedButtonBorderDisabled": [
+              128,
+              128,
+              128,
+              255
+            ],
+            "emphasizedButtonBorderHover": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "emphasizedButtonForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "emphasizedButtonForegroundDisabled": [
+              64,
+              64,
+              64,
+              255
+            ],
+            "emphasizedButtonForegroundHover": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "emphasizedButtonIcon": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "emphasizedButtonIconDisabled": [
+              128,
+              128,
+              128,
+              255
+            ],
+            "emphasizedButtonIconHover": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "errorHelperTextBackground": [
+              37,
+              37,
+              37,
+              255
+            ],
+            "errorHelperTextForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "errorIconBackground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "errorIconForeground": [
+              178,
+              34,
+              34,
+              255
+            ],
+            "inlineTableHeaderBackground": [
+              25,
+              25,
+              25,
+              255
+            ],
+            "inlineTableRowBackground": [
+              37,
+              37,
+              37,
+              255
+            ],
+            "inlineTableBorder": [
+              50,
+              50,
+              50,
+              255
+            ],
+            "inputBorder": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "inputBorderDisabled": [
+              124,
+              124,
+              124,
+              255
+            ],
+            "itemSelectedBackground": [
+              40,
+              0,
+              95,
+              255
+            ],
+            "itemHoverBackground": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "loadingBarBackground": [
+              255,
+              229,
+              142,
+              255
+            ],
+            "none": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "panelBorder": [
+              87,
+              87,
+              87,
+              255
+            ],
+            "primaryAccent": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "primaryAccentDisabled": [
+              124,
+              124,
+              124,
+              255
+            ],
+            "primaryAccentHover": [
+              161,
+              161,
+              161,
+              255
+            ],
+            "primaryAccentLarge": [
+              255,
+              199,
+              9,
+              255
+            ],
+            "primaryBackground": [
+              32,
+              32,
+              32,
+              255
+            ],
+            "primaryBackgroundDisabled": [
+              128,
+              128,
+              128,
+              255
+            ],
+            "primaryBorder": [
+              50,
+              50,
+              50,
+              255
+            ],
+            "primaryForeground": [
+              225,
+              225,
+              225,
+              255
+            ],
+            "primaryForegroundDisabled": [
+              124,
+              124,
+              124,
+              255
+            ],
+            "secondaryBackground": [
+              64,
+              64,
+              64,
+              255
+            ],
+            "secondaryBorder": [
+              37,
+              37,
+              37,
+              255
+            ],
+            "secondaryForeground": [
+              225,
+              225,
+              225,
+              255
+            ],
+            "splashScreenForeground": [
+              0,
+              0,
+              0,
+              255
+            ],
+            "tabPrimaryForeground": [
+              255,
+              255,
+              255,
+              255
+            ],
+            "tabSecondaryForeground": [
+              90,
+              31,
+              171,
+              255
+            ]
+          },
+          "template": "dark",
+          "title": "language-common-theme-dark"
+        }
+      ],
       "$type": "branding"
     },
     {
