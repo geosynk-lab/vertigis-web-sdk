@@ -1,7 +1,52 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Usage: ./build.sh [name]
+#            Build build/<name>.js and build/<name>.js.txt.
+#        ./build.sh upload-gc <public-url> [name]
+#            Build, then upload build/<name>.js to Google Cloud Storage with gcloud.
+#
+# <public-url> is https://storage.googleapis.com/<bucket>/<path> or gs://<bucket>/<path>.
+# If the URL ends with ".js", it is the object name. Otherwise it is a folder and the file is <name>.js in it.
+# The bucket must already allow public read (allUsers: Storage Object Viewer). This script does not change access.
+
+UPLOAD_URL=""
+if [ "${1:-}" = "upload-gc" ]; then
+    UPLOAD_URL="${2:-}"
+    if [ -z "$UPLOAD_URL" ]; then
+        echo "Usage: ./build.sh upload-gc <public-url> [name]" >&2
+        exit 1
+    fi
+    shift 2
+fi
+
 NAME="${1:-__PROJECT_NAME__}"
+
+# Check the upload settings before the build, so that a bad URL fails fast.
+GS_OBJECT=""
+if [ -n "$UPLOAD_URL" ]; then
+    case "$UPLOAD_URL" in
+        gs://*) GS_PATH="${UPLOAD_URL#gs://}" ;;
+        https://storage.googleapis.com/*) GS_PATH="${UPLOAD_URL#https://storage.googleapis.com/}" ;;
+        *)
+            echo "Error: the URL must start with https://storage.googleapis.com/ or gs://" >&2
+            exit 1
+            ;;
+    esac
+    if [ -z "${GS_PATH%%/*}" ]; then
+        echo "Error: no bucket name in $UPLOAD_URL" >&2
+        exit 1
+    fi
+    case "$GS_PATH" in
+        *.js) GS_OBJECT="$GS_PATH" ;;
+        */) GS_OBJECT="${GS_PATH}${NAME}.js" ;;
+        *) GS_OBJECT="${GS_PATH}/${NAME}.js" ;;
+    esac
+    if ! command -v gcloud >/dev/null 2>&1; then
+        echo "Error: gcloud not found. Install the Google Cloud CLI and run: gcloud auth login" >&2
+        exit 1
+    fi
+fi
 
 npm run build
 
@@ -18,3 +63,13 @@ fi
 cp -f "build/main.js" "build/${NAME}.js"
 cp -f "build/main.js" "build/${NAME}.js.txt"
 echo "Created build/${NAME}.js and build/${NAME}.js.txt (verified zero dev URLs)"
+
+if [ -n "$GS_OBJECT" ]; then
+    echo "Uploading build/${NAME}.js to gs://${GS_OBJECT}..."
+    # no-cache: VertiGIS Studio Web loads the new version at the next app load.
+    gcloud storage cp "build/${NAME}.js" "gs://${GS_OBJECT}" \
+        --content-type="application/javascript" \
+        --cache-control="no-cache"
+    echo "Uploaded. Public URL (add it in Designer > App Settings > Custom Libraries):"
+    echo "  https://storage.googleapis.com/${GS_OBJECT}"
+fi

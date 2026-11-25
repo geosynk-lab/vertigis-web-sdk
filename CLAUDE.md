@@ -20,7 +20,7 @@ libraries for VertiGIS Studio Web.
     the `*.template` files into user projects.
 -   `template/` is the sample project that `create` copies. A change to `config/` or `template/` changes all new user
     projects.
--   `semantic-release` releases the package from `master`, The version in `package.json` is a placeholder. Do not change
+-   `semantic-release` releases the package from `main`. The version in `package.json` is a placeholder. Do not change
     it.
 -   A `CHANGELOG.md` file is maintained. Only **user facing** changes are included. Do not record changes from the
     `@vertigis/sdk-library` dependency.

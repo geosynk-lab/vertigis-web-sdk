@@ -7,6 +7,9 @@
 -   Add `./start.sh remote` (`start.bat remote` on Windows) and `npm run start:remote` to new projects. This mode pulls
     the branch from `origin`, then fetches it again each 5 seconds while the server runs. It fast-forwards only. It does
     not change local commits or uncommitted changes.
+-   Add `./build.sh upload-gc <public-url> [name]` (`build.bat upload-gc <public-url> [name]` on Windows) to new
+    projects. This command builds the project, then uploads `build/<name>.js` to Google Cloud Storage with `gcloud`. Then
+    it shows the public URL of the library.
 
 ## [3.1.1] - 2026-10-15
 

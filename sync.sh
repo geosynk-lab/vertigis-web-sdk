@@ -3,7 +3,7 @@
 # VertiGIS Studio Web SDK Upstream Synchronization Script
 # Synchronizes with the official VertiGIS upstream repository (upstream/master),
 # protecting enterprise template overlays and custom scripts from conflicts,
-# and pushes updates to GitHub (origin/master).
+# and pushes updates to GitHub (origin/main).
 # ==============================================================================
 
 set -euo pipefail
@@ -16,7 +16,8 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BRANCH="master"
+BRANCH="main"
+UPSTREAM_BRANCH="master" # The official VertiGIS repository still uses master.
 PROTECTED_PATHS=("template-custom" "scripts/create.js" "README.md" "sync.sh")
 
 log_info() {
@@ -51,7 +52,7 @@ main() {
         has_stash=1
     fi
 
-    # 2. Ensure on master branch
+    # 2. Ensure on main branch
     local current_branch
     current_branch="$(git rev-parse --abbrev-ref HEAD)"
     if [ "$current_branch" != "$BRANCH" ]; then
@@ -69,9 +70,9 @@ main() {
     log_info "Fetching latest commits from upstream..."
     git fetch upstream
 
-    # 5. Merge upstream/master
-    log_info "Merging upstream/${BRANCH} into ${BRANCH}..."
-    if git merge "upstream/${BRANCH}" --no-edit -m "chore: merge upstream/${BRANCH} while preserving enterprise overlays"; then
+    # 5. Merge upstream/master into main
+    log_info "Merging upstream/${UPSTREAM_BRANCH} into ${BRANCH}..."
+    if git merge "upstream/${UPSTREAM_BRANCH}" --no-edit -m "chore: merge upstream/${UPSTREAM_BRANCH} while preserving enterprise overlays"; then
         log_success "Merge completed cleanly without conflicts."
     else
         log_warn "Merge encountered conflicts. Preserving enterprise files..."

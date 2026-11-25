@@ -47,7 +47,7 @@ Every project scaffolded from this repository includes:
 
 5. **Cross-Platform Startup & Build Scripts**:
    - `start.sh` / `start.bat`: Checks and kills stale port 3000 processes, verifies SSL certificates, and launches the development server.
-   - `build.sh` / `build.bat`: Compiles and validates production bundles into `dist/`.
+   - `build.sh` / `build.bat`: Compiles and validates production bundles into `build/`. `upload-gc <public-url>` also uploads the bundle to Google Cloud Storage.
 
 6. **Coding Assistant Governance (`AGENTS.md`)**:
    - Pre-injected VertiGIS Web SDK directives ensuring AI coding assistants (such as Antigravity, Claude Code, Cursor, Copilot) strictly follow typography rules, token usage, and file size limits.
@@ -145,7 +145,8 @@ my-web-library/
 - **`./start.sh remote [branch] [seconds]`** (or `start.bat remote [branch]`, or `npm run start:remote`): Pulls `origin/<branch>` first, then fetches it again each 5 seconds (default) while the dev server runs. Fast-forward only: local commits and uncommitted changes are never overwritten. When `package.json` or a lockfile changes, it tells you to run `npm install`.
 - **`npm start`**: Runs the project in development mode with hot reloading.
 - **`npm run auth:portal`**: Interactive wizard to configure ArcGIS Enterprise Portal / AGOL OAuth authentication and secured web maps.
-- **`npm run build`** (or `./build.sh`): Generates an optimized production bundle in `dist/`.
+- **`npm run build`** (or `./build.sh [name]`): Generates an optimized production bundle in `build/`.
+- **`./build.sh upload-gc <public-url> [name]`** (or `build.bat upload-gc <public-url> [name]`): Builds, then uploads `build/<name>.js` to Google Cloud Storage with `gcloud`. The URL is `https://storage.googleapis.com/<bucket>/<path>` or `gs://<bucket>/<path>`. If it ends with `.js`, it is the file name. Otherwise it is a folder. The bucket must already allow public read.
 - **`npm run cert:gen`**: Regenerates development SSL certificates in `certs/`.
 
 ---
@@ -193,6 +194,13 @@ Outputs optimized bundles to `build/`:
 - `build/main.js` (standard AMD bundle)
 - `build/<project-name>.js` (named bundle for ArcGIS portal hosting)
 - `build/<project-name>.js.txt` (raw text bundle for script upload workflows)
+
+Build and upload to a public Google Cloud Storage bucket (needs the [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) and `gcloud auth login`):
+```bash
+./build.sh upload-gc https://storage.googleapis.com/my-bucket/libs/
+# Uploads build/<project-name>.js to gs://my-bucket/libs/<project-name>.js with Cache-Control: no-cache,
+# then prints the public URL to add in Designer > App Settings > Custom Libraries.
+```
 
 ---
 
@@ -297,8 +305,9 @@ This fork tracks official updates from `https://github.com/vertigis/vertigis-web
 
 ```bash
 git fetch upstream
+git checkout main
 git merge upstream/master --no-edit
-git push origin master
+git push origin main
 ```
 Or run the parent batch synchronizer:
 ```bash
