@@ -22,6 +22,7 @@ export const UI_TOKENS = {
     primaryAccentLight: "var(--primaryAccentLight, #e1f5fe)",
     buttonForeground: "var(--buttonForeground, #ffffff)",
     emphasizedButtonBackground: "var(--emphasizedButtonBackground, var(--primaryAccent, #007ac2))",
+    emphasizedButtonForeground: "var(--emphasizedButtonForeground, #ffffff)",
 
     itemHoverBackground: "var(--itemHoverBackground, rgba(0, 0, 0, 0.04))",
     itemSelectedBackground: "var(--itemSelectedBackground, rgba(0, 122, 194, 0.12))",
@@ -66,15 +67,22 @@ export const UI_TOKENS = {
         secondary: "var(--secondaryBorder, #eeeeee)",
         focus: "var(--focusBorder, #007ac2)",
     },
+    // Use accent tokens for borders, icons, indicators and text on panel surfaces.
+    // Do not use accent.primary as a background for text: the host has no foreground token that is
+    // paired with --primaryAccent. In brand themes, --primaryAccent and the button foregrounds can be
+    // the same colour (for example black on black).
     accent: {
         primary: "var(--primaryAccent, #007ac2)",
         hover: "var(--primaryAccentHover, #005a91)",
         light: "var(--primaryAccentLight, #e1f5fe)",
-        contrastText: "var(--buttonForeground, #ffffff)",
     },
+    // Each background is used with the foreground of the same pair:
+    //   buttonBackground + buttonForeground (emphasized button pair from the host theme).
+    //   Selected state (toggle, list item): itemSelected background, inherited text
+    //   (text.primary only in createTheme styleOverrides), accent.primary border.
     control: {
         buttonBackground: "var(--emphasizedButtonBackground, var(--primaryAccent, #007ac2))",
-        buttonForeground: "var(--buttonForeground, #ffffff)",
+        buttonForeground: "var(--emphasizedButtonForeground, #ffffff)",
         itemHover: "var(--itemHoverBackground, rgba(0, 0, 0, 0.04))",
         itemSelected: "var(--itemSelectedBackground, rgba(0, 122, 194, 0.12))",
     },

@@ -32,11 +32,14 @@ RUN if [ -f pnpm-lock.yaml ]; then \
         npm run build; \
     fi
 
-# Layer 3: Sanity audit (verify zero dev OAuth URLs leaked into production bundle)
-RUN if grep -Fq "localtest.me" build/main.js; then \
-        echo "FATAL: localtest.me detected in build/main.js! Dev OAuth hijacked production bundle." >&2; \
-        exit 1; \
-    fi
+# Layer 3: Sanity audit (verify zero dev OAuth URLs leaked into production bundle).
+# "localtest.me" is the dev host and "oauth_callback" is the dev popup callback page.
+RUN for marker in localtest.me oauth_callback; do \
+        if grep -Fq "$marker" build/main.js; then \
+            echo "FATAL: dev OAuth URL ($marker) detected in build/main.js! Dev OAuth hijacked production bundle." >&2; \
+            exit 1; \
+        fi; \
+    done
 
 # Layer 4: Minimal scratch exporter (extracts build/ directory via BuildKit)
 FROM scratch AS exporter

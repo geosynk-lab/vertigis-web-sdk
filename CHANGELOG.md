@@ -14,6 +14,16 @@
     `npm run auth:portal` use, with a comment for each value. Examples: the build name, the upload URL, the remote
     branch, and the portal URL and client ID. A command-line argument overrides the value in the file.
 
+### Changed
+
+-   Make the production gate in `build.sh`, `build.bat`, and `Dockerfile.build` of new projects also look for
+    `oauth_callback` in `build/main.js`. Before, it looked only for `localtest.me`.
+-   In `src/tokens/ui.ts` of new projects, set `UI_TOKENS.control.buttonForeground` to `--emphasizedButtonForeground`,
+    the partner of `--emphasizedButtonBackground`. Before, it was `--buttonForeground`, which belongs to a different pair.
+-   Remove `UI_TOKENS.accent.contrastText` from new projects. No host token is paired with `--primaryAccent`, so text on
+    an accent fill can be unreadable in brand themes (for example black on black). For a selected state, use
+    `UI_TOKENS.control.itemSelected` with the inherited text and an accent border.
+
 ### Fixed
 
 -   Fix `start.bat remote`, which did not stop the sync window when the dev server stopped

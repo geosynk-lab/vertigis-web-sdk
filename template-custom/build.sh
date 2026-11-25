@@ -70,10 +70,16 @@ if [ ! -f "build/main.js" ]; then
     exit 1
 fi
 
-if grep -Fq "localtest.me" "build/main.js"; then
-    echo "Error: localtest.me detected in build/main.js! Dev OAuth hijacked production bundle." >&2
-    exit 1
-fi
+# Production gate: the dev OAuth code (src/auth) must not be in the bundle. It is removed only when
+# NODE_ENV is "production" (the SDK build command sets it). "localtest.me" is the dev host, and
+# "oauth_callback" is the dev popup callback page. If your library uses its own OAuth callback in
+# production, rename that page or change this check.
+for DEV_MARKER in "localtest.me" "oauth_callback"; do
+    if grep -Fq "$DEV_MARKER" "build/main.js"; then
+        echo "Error: dev OAuth URL ($DEV_MARKER) detected in build/main.js. Dev OAuth hijacked production bundle." >&2
+        exit 1
+    fi
+done
 
 cp -f "build/main.js" "build/${NAME}.js"
 cp -f "build/main.js" "build/${NAME}.js.txt"

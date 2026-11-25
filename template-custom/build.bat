@@ -68,10 +68,16 @@ if not exist build\main.js (
     echo Error: build\main.js not found.
     exit /b 1
 )
-findstr /C:"localtest.me" build\main.js >nul
-if %ERRORLEVEL% equ 0 (
-    echo Error: localtest.me detected in build\main.js. Dev OAuth hijacked production bundle.
-    exit /b 1
+rem Production gate: the dev OAuth code (src\auth) must not be in the bundle. It is removed only when
+rem NODE_ENV is "production" (the SDK build command sets it). "localtest.me" is the dev host, and
+rem "oauth_callback" is the dev popup callback page. If your library uses its own OAuth callback in
+rem production, rename that page or change this check.
+for %%M in (localtest.me oauth_callback) do (
+    findstr /C:"%%M" build\main.js >nul
+    if not errorlevel 1 (
+        echo Error: dev OAuth URL ^(%%M^) detected in build\main.js. Dev OAuth hijacked production bundle.
+        exit /b 1
+    )
 )
 copy /y build\main.js "build\!NAME!.js" >nul
 copy /y build\main.js "build\!NAME!.js.txt" >nul

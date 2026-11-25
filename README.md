@@ -240,6 +240,8 @@ Outputs optimized bundles to `build/`:
 - `build/<project-name>.js` (named bundle for ArcGIS portal hosting)
 - `build/<project-name>.js.txt` (raw text bundle for script upload workflows)
 
+`build.sh`, `build.bat`, and `Dockerfile.build` stop with an error if `build/main.js` contains `localtest.me` or `oauth_callback`. These strings show that the dev OAuth code (`src/auth`) is in the production bundle.
+
 Build and upload to a public Google Cloud Storage bucket (needs the [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) and `gcloud auth login`):
 ```bash
 ./build.sh upload-gc https://storage.googleapis.com/my-bucket/libs/
