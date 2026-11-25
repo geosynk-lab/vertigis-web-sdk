@@ -14,6 +14,15 @@
     `npm run auth:portal` use, with a comment for each value. Examples: the build name, the upload URL, the remote
     branch, and the portal URL and client ID. A command-line argument overrides the value in the file.
 
+### Fixed
+
+-   Make the dev server of new projects use `certs/cert.pem` and `certs/key.pem`. Before, `webpack-dev-server` made its
+    own certificate for `localhost` only, so `https://localtest.me:3001` showed `NET::ERR_CERT_COMMON_NAME_INVALID`. To
+    remove the browser warning, add `certs/cert.pem` to the trusted root certificates of the OS once. On Windows:
+    `certutil -addstore -user Root certs\cert.pem`.
+-   Make `certs/generate-cert.bat` of new projects show a warning when `openssl` fails. Before, it could show
+    "[SUCCESS]". It also makes the certificate again when `key.pem` is missing.
+
 ### Changed
 
 -   Make the production gate in `build.sh`, `build.bat`, and `Dockerfile.build` of new projects also look for

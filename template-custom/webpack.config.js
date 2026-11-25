@@ -1,3 +1,6 @@
+import fs from "node:fs";
+import path from "node:path";
+
 let defaultWebpackConfig, merge;
 try {
     const mod = await import("@vertigis/web-sdk/config/webpack.config.js");
@@ -10,6 +13,13 @@ try {
 }
 
 const isProduction = process.env.NODE_ENV === "production";
+
+// Use the certificate from certs/ (made by certs/generate-cert.sh or .bat). It covers localtest.me and localhost.
+// Without it, webpack-dev-server makes its own certificate, and that certificate does not cover localtest.me.
+const certDir = path.join(import.meta.dirname, "certs");
+const keyFile = path.join(certDir, "key.pem");
+const certFile = path.join(certDir, "cert.pem");
+const hasCert = fs.existsSync(keyFile) && fs.existsSync(certFile);
 
 export default merge(defaultWebpackConfig, {
     // 1. Filesystem caching to dramatically speed up rebuild times
@@ -26,6 +36,17 @@ export default merge(defaultWebpackConfig, {
         : {
               devServer: {
                   port: 3001,
+                  ...(hasCert
+                      ? {
+                            server: {
+                                type: "https",
+                                options: {
+                                    key: fs.readFileSync(keyFile),
+                                    cert: fs.readFileSync(certFile),
+                                },
+                            },
+                        }
+                      : {}),
                   allowedHosts: "all",
                   headers: {
                       "Access-Control-Allow-Origin": "*",

@@ -9,6 +9,7 @@ if [ ! -f "$CERTS_DIR/cert.pem" ] || [ ! -f "$CERTS_DIR/key.pem" ]; then
         -subj "/CN=localtest.me" \
         -addext "subjectAltName=DNS:localtest.me,DNS:*.localtest.me,DNS:localhost,DNS:*.localhost,IP:127.0.0.1"
     echo "[SUCCESS] SSL certificate and private key generated in certs/ with SAN (localtest.me, localhost, 127.0.0.1)"
+    echo "[INFO] To make the browser trust it, add $CERTS_DIR/cert.pem to the trusted root certificates of your OS."
 else
     echo "[INFO] SSL certificate already exists in certs/"
 fi
