@@ -1393,6 +1393,8 @@
           "title": "language-common-theme-dark"
         }
       ],
+      "applicationName": "Geosynk - VertiGIS Web",
+      "favIcon": "https://storage.googleapis.com/main-efu/ebta-resources/icons/favicon-dev.png",
       "$type": "branding"
     },
     {
